@@ -1,4 +1,4 @@
-package com.sg.formsubmissionportal_androidclient.services.network;
+package com.sg.formsubmissionportal_androidclient.network;
 
 import com.google.gson.JsonObject;
 

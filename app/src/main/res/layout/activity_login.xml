@@ -93,11 +93,14 @@
                 android:elevation="4dp"
                 android:onClick="@{ClickHandlers::onForgotPasswordClicked}"
                 android:textColor="@color/dark_grey"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
                 android:textColorHighlight="@color/dark_grey"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:visibility="visible"
-                tools:targetApi="lollipop" />
+                tools:targetApi="lollipop"
+                android:focusable="true" />
 
 
             <Button

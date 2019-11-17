@@ -1,4 +1,4 @@
-package com.sg.formsubmissionportal_androidclient.services.network;
+package com.sg.formsubmissionportal_androidclient.network;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +11,7 @@ public class RetrofitInstance {
     private static final String BASE_URL="http://192.168.43.255:8080/";
     private static final int REQUEST_TIMEOUT = 60;
     private static OkHttpClient okHttpClient;
-    public static CallService getService()
+    public static Retrofit getService()
     {
         if (okHttpClient == null)
             initOkHttp();
@@ -21,7 +21,7 @@ public class RetrofitInstance {
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create()).build();
         }
-        return retrofit.create(CallService.class);
+        return retrofit;
     }
 
     private static void initOkHttp() {
