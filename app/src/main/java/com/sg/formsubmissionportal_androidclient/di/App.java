@@ -14,7 +14,9 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         application=this;
-        component=DaggerComponent.builder().applicationContextModule(new ApplicationContextModule(application)).callServiceModule(new CallServiceModule()).build();
+        component=DaggerComponent.builder().applicationContextModule(new ApplicationContextModule(application))
+                .loginSignupServiceModule(new LoginSignupServiceModule())
+                .build();
 
     }
 

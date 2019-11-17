@@ -7,6 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class User implements Serializable, Parcelable {
 
@@ -33,10 +34,10 @@ public class User implements Serializable, Parcelable {
     private String employeeNumber;
     @SerializedName("role")
     @Expose
-    private String role;
+    private Role role;
     @SerializedName("forms")
     @Expose
-    private Object forms;
+    private List<Form> forms = null;
     public final static Parcelable.Creator<User> CREATOR = new Creator<User>() {
 
 
@@ -52,7 +53,7 @@ public class User implements Serializable, Parcelable {
         }
 
     };
-    private final static long serialVersionUID = -1011084854772765539L;
+    private final static long serialVersionUID = 8140769120607132652L;
 
     protected User(Parcel in) {
         this.id = ((Long) in.readValue((Long.class.getClassLoader())));
@@ -62,8 +63,8 @@ public class User implements Serializable, Parcelable {
         this.enabled = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.facultyNumber = ((String) in.readValue((String.class.getClassLoader())));
         this.employeeNumber = ((String) in.readValue((String.class.getClassLoader())));
-        this.role = ((String) in.readValue((String.class.getClassLoader())));
-        this.forms = ((Object) in.readValue((Object.class.getClassLoader())));
+        this.role = ((Role) in.readValue((Role.class.getClassLoader())));
+        in.readList(this.forms, (Form.class.getClassLoader()));
     }
 
     public User() {
@@ -125,19 +126,19 @@ public class User implements Serializable, Parcelable {
         this.employeeNumber = employeeNumber;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public Object getForms() {
+    public List<Form> getForms() {
         return forms;
     }
 
-    public void setForms(Object forms) {
+    public void setForms(List<Form> forms) {
         this.forms = forms;
     }
 
@@ -150,7 +151,7 @@ public class User implements Serializable, Parcelable {
         dest.writeValue(facultyNumber);
         dest.writeValue(employeeNumber);
         dest.writeValue(role);
-        dest.writeValue(forms);
+        dest.writeList(forms);
     }
 
     public int describeContents() {

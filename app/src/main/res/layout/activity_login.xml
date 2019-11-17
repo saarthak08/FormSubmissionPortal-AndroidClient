@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickHandlers"
-            type="com.sg.formsubmissionportal_androidclient.ui.LoginActivity.LoginActivity.ClickHandlers"/>
+            type="com.sg.formsubmissionportal_androidclient.ui.LoginActivity.ClickHandlers"/>
     </data>
     <ScrollView
         android:id="@+id/scrollView"
