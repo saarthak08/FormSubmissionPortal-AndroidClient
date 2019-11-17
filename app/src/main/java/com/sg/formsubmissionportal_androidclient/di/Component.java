@@ -1,6 +1,6 @@
 package com.sg.formsubmissionportal_androidclient.di;
 
-import com.sg.formsubmissionportal_androidclient.ui.login.LoginActivity;
+import com.sg.formsubmissionportal_androidclient.ui.LoginActivity.LoginActivity;
 
 
 import javax.inject.Singleton;

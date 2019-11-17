@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickHandlers"
-            type="com.sg.formsubmissionportal_androidclient.ui.login.LoginActivity.ClickHandlers"/>
+            type="com.sg.formsubmissionportal_androidclient.ui.LoginActivity.LoginActivity.ClickHandlers"/>
     </data>
     <ScrollView
         android:id="@+id/scrollView"
@@ -78,8 +78,8 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/textViewforgotstu"
+        <!--    <TextView
+                android:id="@+id/textViewforget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -100,7 +100,7 @@
                 android:textStyle="bold"
                 android:visibility="visible"
                 tools:targetApi="lollipop"
-                android:focusable="true" />
+                android:focusable="true" /> -->
 
 
             <Button
@@ -110,9 +110,9 @@
                 android:layout_gravity="center"
                 android:stateListAnimator="@null"
                 android:elevation="4dp"
-                android:layout_marginLeft="@dimen/dimen_32x"
-                android:layout_marginTop="@dimen/dimen_16x"
-                android:layout_marginRight="@dimen/dimen_32x"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="@dimen/dimen_32x"
+                android:layout_marginRight="48dp"
                 android:text="@string/login"
                 android:clickable="true"
                 android:onClick="@{ClickHandlers::onLoginButtonClicked}"

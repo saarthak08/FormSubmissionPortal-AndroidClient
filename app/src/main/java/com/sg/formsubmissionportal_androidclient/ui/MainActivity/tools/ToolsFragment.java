@@ -1,4 +1,4 @@
-package com.sg.formsubmissionportal_androidclient.ui.home;
+package com.sg.formsubmissionportal_androidclient.ui.MainActivity.tools;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.sg.formsubmissionportal_androidclient.R;
 
-public class HomeFragment extends Fragment {
+public class ToolsFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private ToolsViewModel toolsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        toolsViewModel =
+                ViewModelProviders.of(this).get(ToolsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_tools, container, false);
+        final TextView textView = root.findViewById(R.id.text_tools);
+        toolsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

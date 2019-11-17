@@ -1,16 +1,16 @@
-package com.sg.formsubmissionportal_androidclient.ui.notifications;
+package com.sg.formsubmissionportal_androidclient.ui.MainActivity.share;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class ShareViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public ShareViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mText.setValue("This is share fragment");
     }
 
     public LiveData<String> getText() {

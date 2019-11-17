@@ -1,4 +1,4 @@
-package com.sg.formsubmissionportal_androidclient.ui.notifications;
+package com.sg.formsubmissionportal_androidclient.ui.MainActivity.notifications;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
