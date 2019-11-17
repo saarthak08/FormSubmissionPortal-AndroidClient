@@ -1,6 +1,19 @@
 <resources>
-    <string name="app_name">FormSubmissionPortal-AndroidClient</string>
+    <string name="app_name">FormSubmissionPortal-AMU</string>
+    <string name="app_shortName">FSP-AMU</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="email">Email</string>
+    <string name="password">Password*</string>
+    <string name="fpwd">Forgot Password?</string>
+    <string name="login">Log In</string>
+    <string name="signup">Not a member? Sign up</string>
+    <string name="name">Name*</string>
+    <string name="signupp">Sign Up</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="otherloginoptions">Other Login Options</string>
+    <string name="ok">OK</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+
 </resources>
