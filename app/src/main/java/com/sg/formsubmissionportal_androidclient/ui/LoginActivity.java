@@ -2,6 +2,8 @@ package com.sg.formsubmissionportal_androidclient.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +24,7 @@ import com.sg.formsubmissionportal_androidclient.di.App;
 import com.sg.formsubmissionportal_androidclient.model.User;
 import com.sg.formsubmissionportal_androidclient.network.FormService;
 import com.sg.formsubmissionportal_androidclient.network.LoginSignupService;
+import com.sg.formsubmissionportal_androidclient.ui.MainActivity.MainActivity;
 
 import javax.inject.Inject;
 
@@ -85,14 +88,22 @@ public class LoginActivity extends AppCompatActivity {
                             editor = pref.edit();
                             editor.putString(KEY_NAME,response.body().get("token").toString());
                             editor.putBoolean(IS_USER_LOGIN,true);
-                            editor.commit();
-                            progressBar.setIndeterminate(false);
                             progressBar.setVisibility(View.INVISIBLE);
                             String mJsonString = response.body().get("user").toString();
                             JsonParser parser = new JsonParser();
                             JsonElement mJson =  parser.parse(mJsonString);
                             Gson gson = new Gson();
                             User object = gson.fromJson(mJson, User.class);
+                            editor.putLong("userid",object.getId());
+                            editor.putString("email",object.getEmail());
+                            editor.putString("firstName",object.getFirstName());
+                            editor.putString("lastName",object.getLastName());
+                            editor.putString("role",object.getRole().getUserType());
+                            editor.commit();
+                            progressBar.setIndeterminate(false);
+                            Intent i=new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(i);
+                            LoginActivity.this.finish();
                         }
                         else if(response.code()==401){
                             progressBar.setIndeterminate(false);
@@ -121,11 +132,32 @@ public class LoginActivity extends AppCompatActivity {
 
         public void onForgotPasswordClicked(View view){
 
+            /*
+            pref=getSharedPreferences(PREFER_NAME,PRIVATE_MODE);
+            editor = pref.edit();
+            editor.clear();
+            editor.apply();
+
+
+
+
+            if(pref.contains(IS_USER_LOGIN)){
+            boolean t=pref.getBoolean(IS_USER_LOGIN,false);
+            if(t){
+                String username=pref.getString(KEY_NAME,"");
+                Intent i=new Intent(MainActivity.this,HomeActivity.class);
+                i.putExtra("username",username);
+                startActivity(i);
+                MainActivity.this.finish();
+            }
+
+             */
+
         }
 
 
         public void onSignUpButtonClicked(View view){
-
+            startActivity(new Intent(LoginActivity.this,SignupActivity.class));
         }
     }
 }

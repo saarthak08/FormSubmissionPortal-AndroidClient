@@ -1,10 +1,12 @@
 package com.sg.formsubmissionportal_androidclient.ui.MainActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -25,6 +27,13 @@ import android.view.Menu;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    int PRIVATE_MODE = 0;
+    public static final String PREFER_NAME = "FSP";
+    public static final String IS_USER_LOGIN = "IsUserLoggedIn";
+    public static final String KEY_NAME = "token";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        pref=getSharedPreferences(PREFER_NAME,PRIVATE_MODE);
+        Log.d("MainActivity",pref.getString("email",""));
     }
 
     @Override

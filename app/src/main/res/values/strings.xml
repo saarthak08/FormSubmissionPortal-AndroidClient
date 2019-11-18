@@ -28,5 +28,9 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="first_name">First Name</string>
+    <string name="sign_up">Sign up!</string>
+    <string name="last_name">Last Name</string>
+    <string name="faculty_employee_number">Faculty/Employee Number</string>
 
 </resources>
