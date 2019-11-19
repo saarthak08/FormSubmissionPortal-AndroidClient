@@ -82,8 +82,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                         if(response.code() == 200) {
-                            Toast.makeText(LoginActivity.this,"Login successful",Toast.LENGTH_SHORT).show();
-                            Log.d("Request",response.body().get("token").toString());
+                            //Toast.makeText(LoginActivity.this,"Login successful",Toast.LENGTH_SHORT).show();
+                            //Log.d("Request",response.body().get("token").toString());
                             pref = LoginActivity.this.getSharedPreferences(PREFER_NAME, PRIVATE_MODE);
                             editor = pref.edit();
                             editor.putString(KEY_NAME,response.body().get("token").toString());
@@ -109,6 +109,11 @@ public class LoginActivity extends AppCompatActivity {
                             progressBar.setIndeterminate(false);
                             progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(LoginActivity.this,"Invalid Username or Password!",Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            progressBar.setIndeterminate(false);
+                            progressBar.setVisibility(View.INVISIBLE);
+                            Toast.makeText(LoginActivity.this,"Login failed! Please try again.",Toast.LENGTH_SHORT).show();
                         }
                     }
 

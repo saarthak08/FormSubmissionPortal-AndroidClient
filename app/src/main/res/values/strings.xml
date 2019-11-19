@@ -32,5 +32,13 @@
     <string name="sign_up">Sign up!</string>
     <string name="last_name">Last Name</string>
     <string name="faculty_employee_number">Faculty/Employee Number</string>
+    <string name="provost">Provost</string>
+    <string name="dean">Dean</string>
+    <string name="student">Student</string>
+    <string name="my_forms">My Forms</string>
+    <string name="all_forms">All Forms</string>
+    <string name="current_submissions">Current Submissions</string>
+    <string name="my_profile">My Profile</string>
+    <string name="logout">Logout</string>
 
 </resources>

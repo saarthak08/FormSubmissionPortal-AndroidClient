@@ -1,5 +1,7 @@
 package com.sg.formsubmissionportal_androidclient.network;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sg.formsubmissionportal_androidclient.di.App;
 
 import java.io.File;
@@ -15,6 +17,7 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RetrofitInstance {
     private static Retrofit retrofit=null;
@@ -30,11 +33,18 @@ public class RetrofitInstance {
             initOkHttp();
         }
 
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+
+
         if(retrofit==null)
         {
             retrofit=new Retrofit.Builder().baseUrl(BASE_URL)
                     .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create()).build();
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
         }
         return retrofit;
     }
@@ -75,11 +85,15 @@ public class RetrofitInstance {
 
         OkHttpClient client = httpClient.cache(null).build();
 
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
 
         if (authRetrofit == null) {
             authRetrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(client).build();
         }
         return authRetrofit.create(FormService.class);

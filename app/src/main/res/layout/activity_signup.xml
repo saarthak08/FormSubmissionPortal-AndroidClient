@@ -100,6 +100,7 @@
                     android:id="@+id/idNoTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
                     android:hint="@string/faculty_employee_number"
                     android:inputType="text" />
 
@@ -122,23 +123,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="@dimen/dimen_32x"
-                android:paddingTop="@dimen/dimen_16x"
-                android:paddingRight="@dimen/dimen_32x"
-                app:passwordToggleEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/passwords"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/password"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textView"
@@ -166,20 +150,20 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="Student" />
+                    android:text="@string/student" />
 
                 <RadioButton
                     android:id="@+id/radio2"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Dean" />
+                    android:text="@string/dean" />
                 <RadioButton
                     android:id="@+id/radio3"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Controller" />
+                    android:text="@string/provost" />
             </RadioGroup>
 
 

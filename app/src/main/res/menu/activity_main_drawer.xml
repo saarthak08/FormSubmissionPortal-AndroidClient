@@ -5,34 +5,22 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_myforms"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="@string/my_forms" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
-        <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_tools" />
+            android:id="@+id/nav_allforms"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="@string/all_forms" />
+
+
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
-        </menu>
-    </item>
-
+    <group android:checkableBehavior="single"
+        android:id="@+id/group2">
+        <item
+            android:id="@+id/nav_myprofile"
+            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="@string/my_profile" />
+    </group>
 </menu>
