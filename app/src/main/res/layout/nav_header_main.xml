@@ -13,24 +13,30 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="156dp"
-        android:layout_height="115dp"
+        android:layout_width="120dp"
+        android:layout_margin="@dimen/dimen_8x"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/amulogo" />
+        app:srcCompat="@drawable/amu_white" />
 
     <TextView
+        android:id="@+id/headerNameTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Saarthak"
+        android:textStyle="bold|italic"
+        android:textColor="@color/gradient_3_start"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/headerEmailTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/gradient_4_start"
         android:text="saarthakgupta08@gmail.com" />
 
 </LinearLayout>

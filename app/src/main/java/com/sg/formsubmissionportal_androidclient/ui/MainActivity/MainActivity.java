@@ -33,6 +33,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
     public static final String PREFER_NAME = "FSP";
     public static final String IS_USER_LOGIN = "IsUserLoggedIn";
     public static final String KEY_NAME = "token";
+    public String firstName;
+    public String lastName;
+    public String email;
+    public String role;
+    public Long userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         pref=getSharedPreferences(PREFER_NAME,PRIVATE_MODE);
+        firstName=pref.getString("firstName","");
+        lastName=pref.getString("lastName","");
+        email=pref.getString("email","");
+        role=pref.getString("role","");
+        userid=pref.getLong("userid",0);
         editor=pref.edit();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        if(role.equals("STUDENT")){
+           fab.setVisibility(View.GONE);
+        }
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_myprofile,R.id.nav_allforms,R.id.nav_myforms)
@@ -89,6 +103,11 @@ public class MainActivity extends AppCompatActivity {
                 },4000);
             }
         });
+        View v=navigationView.getHeaderView(0);
+        TextView name=v.findViewById(R.id.headerNameTV);
+        TextView email=v.findViewById(R.id.headerEmailTV);
+        name.setText(firstName+" "+lastName);
+        email.setText(this.email);
     }
 
     @Override
