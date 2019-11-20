@@ -1,4 +1,4 @@
-package com.sg.formsubmissionportal_androidclient.ui.MainActivity.slideshow;
+package com.sg.formsubmissionportal_androidclient.ui.MainActivity.allforms;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.sg.formsubmissionportal_androidclient.R;
 
-public class SlideshowFragment extends Fragment {
+public class AllFormsFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private AllFormsViewModel allFormsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                ViewModelProviders.of(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        allFormsViewModel =
+                ViewModelProviders.of(this).get(AllFormsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_allforms, container, false);
         final TextView textView = root.findViewById(R.id.text_slideshow);
-        slideshowViewModel.getText().observe(this, new Observer<String>() {
+        allFormsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

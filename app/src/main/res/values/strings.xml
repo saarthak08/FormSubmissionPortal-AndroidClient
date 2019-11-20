@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">FSP-AMU</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="email">Email</string>
     <string name="password">Password*</string>
     <string name="fpwd">Forgot Password?</string>
@@ -22,12 +19,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+
     <string name="first_name">First Name</string>
     <string name="sign_up">Sign up!</string>
     <string name="last_name">Last Name</string>

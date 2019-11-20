@@ -9,11 +9,11 @@ import retrofit2.http.POST;
 
 public interface LoginSignupService {
 
-    @POST("api/authenticate")
+    @POST("authenticate")
     Call<JsonObject> login(
             @Body JsonObject body);
 
-    @POST("api/signup/register")
+    @POST("signup/register")
     Call<JsonObject> signup(
             @Body JsonObject body);
 

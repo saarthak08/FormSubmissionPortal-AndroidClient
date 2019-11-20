@@ -13,20 +13,20 @@
 
     <fragment
         android:id="@+id/nav_myforms"
-        android:name="com.sg.formsubmissionportal_androidclient.ui.MainActivity.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:name="com.sg.formsubmissionportal_androidclient.ui.MainActivity.myforms.MyFormsFragment"
+        android:label="My Forms"
+        tools:layout="@layout/fragment_myforms" />
 
     <fragment
         android:id="@+id/nav_allforms"
-        android:name="com.sg.formsubmissionportal_androidclient.ui.MainActivity.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.sg.formsubmissionportal_androidclient.ui.MainActivity.allforms.AllFormsFragment"
+        android:label="All Forms"
+        tools:layout="@layout/fragment_allforms" />
 
     <fragment
         android:id="@+id/nav_myprofile"
-        android:name="com.sg.formsubmissionportal_androidclient.ui.MainActivity.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:name="com.sg.formsubmissionportal_androidclient.ui.MainActivity.myprofile.MyProfileFragment"
+        android:label="My Profile"
+        tools:layout="@layout/fragment_myprofile" />
 
 </navigation>

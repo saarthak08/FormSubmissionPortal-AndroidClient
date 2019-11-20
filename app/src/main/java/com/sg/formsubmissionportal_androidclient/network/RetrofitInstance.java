@@ -22,7 +22,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class RetrofitInstance {
     private static Retrofit retrofit=null;
     private static Retrofit authRetrofit = null;
-    private static final String BASE_URL="http://192.168.43.193:8080/";
+    private static final String BASE_URL="http://192.168.43.193:8080/api/";
     private static final int REQUEST_TIMEOUT = 60;
     private static OkHttpClient okHttpClient;
 

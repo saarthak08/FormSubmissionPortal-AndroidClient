@@ -1,16 +1,16 @@
-package com.sg.formsubmissionportal_androidclient.ui.MainActivity.slideshow;
+package com.sg.formsubmissionportal_androidclient.ui.MainActivity.allforms;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class AllFormsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SlideshowViewModel() {
+    public AllFormsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("This is AllForms fragment");
     }
 
     public LiveData<String> getText() {
