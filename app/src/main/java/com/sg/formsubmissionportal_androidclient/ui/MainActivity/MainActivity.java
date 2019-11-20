@@ -13,17 +13,17 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.sg.formsubmissionportal_androidclient.R;
+import com.sg.formsubmissionportal_androidclient.di.component.DaggerMainActivityComponent;
+import com.sg.formsubmissionportal_androidclient.di.component.MainActivityComponent;
+import com.sg.formsubmissionportal_androidclient.di.module.OtherNetworkServicesModule;
 import com.sg.formsubmissionportal_androidclient.ui.LoginActivity;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -34,7 +34,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.Menu;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import static com.sg.formsubmissionportal_androidclient.di.App.PREFER_NAME;
+import static com.sg.formsubmissionportal_androidclient.di.App.PRIVATE_MODE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,15 +48,13 @@ public class MainActivity extends AppCompatActivity {
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
-    int PRIVATE_MODE = 0;
-    public static final String PREFER_NAME = "FSP";
-    public static final String IS_USER_LOGIN = "IsUserLoggedIn";
-    public static final String KEY_NAME = "token";
-    public String firstName;
-    public String lastName;
-    public String email;
-    public String role;
-    public Long userid;
+    public static String firstName;
+    public static String lastName;
+    public static String email;
+    public static String role;
+    public static String token;
+    private static MainActivityComponent component;
+    public static Long userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         email=pref.getString("email","");
         role=pref.getString("role","");
         userid=pref.getLong("userid",0);
+        token=pref.getString("token","");
+        buildDaggerOtherComponent(token);
         editor=pref.edit();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        pref=getSharedPreferences(PREFER_NAME,PRIVATE_MODE);
         Log.d("MainActivity",pref.getString("email",""));
         swipeRefreshLayout=findViewById(R.id.swipeRefreshLayoutMain);
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.DKGRAY, Color.RED,Color.GREEN,Color.MAGENTA,Color.BLACK,Color.CYAN);
@@ -146,6 +147,18 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public static void buildDaggerOtherComponent(String token){
+        component= DaggerMainActivityComponent.builder()
+                .otherNetworkServicesModule(new OtherNetworkServicesModule(token))
+                .build();
+    }
+
+
+    public static MainActivityComponent getComponent(){
+        return component;
     }
 
 

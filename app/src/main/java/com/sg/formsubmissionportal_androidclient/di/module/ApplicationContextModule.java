@@ -1,4 +1,4 @@
-package com.sg.formsubmissionportal_androidclient.di;
+package com.sg.formsubmissionportal_androidclient.di.module;
 
 
 import android.app.Application;

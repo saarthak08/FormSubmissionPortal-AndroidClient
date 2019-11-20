@@ -1,13 +1,10 @@
 package com.sg.formsubmissionportal_androidclient.ui;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -24,10 +20,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
 import com.sg.formsubmissionportal_androidclient.R;
-import com.sg.formsubmissionportal_androidclient.databinding.ActivityLoginBinding;
 import com.sg.formsubmissionportal_androidclient.databinding.ActivitySignupBinding;
 import com.sg.formsubmissionportal_androidclient.di.App;
-import com.sg.formsubmissionportal_androidclient.model.User;
 import com.sg.formsubmissionportal_androidclient.network.LoginSignupService;
 
 import javax.inject.Inject;
@@ -62,7 +56,7 @@ public class SignupActivity extends AppCompatActivity {
         idNo=activitySignupBinding.idNoTV;
         signup=activitySignupBinding.signupbuttons;
         progressBar=activitySignupBinding.progressBar1;
-        App.getApp().getComponent().inject(SignupActivity.this);
+        App.getApp().getAppComponent().inject(SignupActivity.this);
         radioGroup=activitySignupBinding.radioGroup;
     }
 

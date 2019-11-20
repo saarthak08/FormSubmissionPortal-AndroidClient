@@ -3,7 +3,9 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/almendra_display</item>
         <item>@font/almendra_italic</item>
+        <item>@font/amarante</item>
         <item>@font/amita</item>
+        <item>@font/artifika</item>
         <item>@font/berkshire_swash</item>
         <item>@font/homemade_apple</item>
         <item>@font/new_rocker</item>

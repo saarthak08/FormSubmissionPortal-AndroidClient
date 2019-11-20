@@ -62,7 +62,7 @@ public class RetrofitInstance {
     }
 
 
-    public static FormService getAuthorizedClient(final String token) {
+    public static Retrofit getAuthorizedClient(final String token) {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
@@ -96,7 +96,7 @@ public class RetrofitInstance {
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(client).build();
         }
-        return authRetrofit.create(FormService.class);
+        return authRetrofit;
     }
 
 }

@@ -22,15 +22,19 @@ import com.sg.formsubmissionportal_androidclient.R;
 import com.sg.formsubmissionportal_androidclient.databinding.ActivityLoginBinding;
 import com.sg.formsubmissionportal_androidclient.di.App;
 import com.sg.formsubmissionportal_androidclient.model.User;
-import com.sg.formsubmissionportal_androidclient.network.FormService;
 import com.sg.formsubmissionportal_androidclient.network.LoginSignupService;
 import com.sg.formsubmissionportal_androidclient.ui.MainActivity.MainActivity;
 
 import javax.inject.Inject;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.sg.formsubmissionportal_androidclient.di.App.IS_USER_LOGIN;
+import static com.sg.formsubmissionportal_androidclient.di.App.PREFER_NAME;
+import static com.sg.formsubmissionportal_androidclient.di.App.PRIVATE_MODE;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,17 +49,14 @@ public class LoginActivity extends AppCompatActivity {
     public LoginSignupService loginSignupService;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
-    int PRIVATE_MODE = 0;
-    public static final String PREFER_NAME = "FSP";
-    public static final String IS_USER_LOGIN = "IsUserLoggedIn";
-    public static final String KEY_NAME = "token";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().setTitle("FormSubmissionPortal-AMU");
-        App.getApp().getComponent().inject(this);
+        App.getApp().getAppComponent().inject(this);
         activityLoginBinding= DataBindingUtil.setContentView(LoginActivity.this,R.layout.activity_login);
         email=activityLoginBinding.email;
         password=activityLoginBinding.password;
@@ -77,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                 req.addProperty("username",email.getText().toString().trim());
                 req.addProperty("password",password.getText().toString().trim());
                 Call<JsonObject> call= loginSignupService.login(req);
-                Log.d("Request",req.toString());
+                //Log.d("Request",req.toString());
                 call.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -86,7 +87,8 @@ public class LoginActivity extends AppCompatActivity {
                             //Log.d("Request",response.body().get("token").toString());
                             pref = LoginActivity.this.getSharedPreferences(PREFER_NAME, PRIVATE_MODE);
                             editor = pref.edit();
-                            editor.putString(KEY_NAME,response.body().get("token").toString());
+                            String token=response.body().get("token").toString();
+                            token=token.substring(1,token.length()-1);
                             editor.putBoolean(IS_USER_LOGIN,true);
                             progressBar.setVisibility(View.INVISIBLE);
                             String mJsonString = response.body().get("user").toString();
@@ -94,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                             JsonElement mJson =  parser.parse(mJsonString);
                             Gson gson = new Gson();
                             User object = gson.fromJson(mJson, User.class);
+                            editor.putString("token",token);
                             editor.putLong("userid",object.getId());
                             editor.putString("email",object.getEmail());
                             editor.putString("firstName",object.getFirstName());
