@@ -2,6 +2,7 @@ package com.sg.formsubmissionportal_androidclient.ui.MainActivity.myforms;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,21 +90,28 @@ public class MyFormsFragment extends Fragment {
 
     public void checkList()
     {
-        if(formsList==null){
-            textView.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
-            progressBar.setIndeterminate(false);
-        }
-        else{
-            if(formsList.size()==0){
-                textView.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.GONE);
-                progressBar.setIndeterminate(false);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(formsList==null){
+                    textView.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+                    progressBar.setIndeterminate(false);
+                }
+                else{
+                    if(formsList.size()==0){
+                        textView.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        progressBar.setIndeterminate(false);
+                    }
+                    else{
+                        textView.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        textView.setVisibility(View.INVISIBLE);
+                    }
+                }
             }
-            else{
-                textView.setVisibility(View.INVISIBLE);
-            }
-        }
+        },500);
     }
 
 }
