@@ -59,6 +59,7 @@ public class FormStatusActivity extends AppCompatActivity {
     private Map<String, Boolean> userFormCheckPoints;
     private StateProgressBar stateProgressBar;
     private ArrayList<String> checkPoints;
+    private Map<String,String> formTimestamps;
 
 
     @Inject
@@ -82,6 +83,7 @@ public class FormStatusActivity extends AppCompatActivity {
         progressBar.setIndeterminate(false);
         formCheckPoints=new HashMap<>();
         userFormCheckPoints=new HashMap<>();
+        formTimestamps=new HashMap<>();
         formTitle = formStatusBinding.formTitleStatus;
         stateProgressBar=formStatusBinding.formStatus;
         formDepartment = formStatusBinding.formDepartmentStatus;
@@ -100,6 +102,7 @@ public class FormStatusActivity extends AppCompatActivity {
         getFormDetails();
         getFormCheckPoints();
         getUserCheckPoints();
+        getUserTimeStamps();
 
     }
 
@@ -198,9 +201,24 @@ public class FormStatusActivity extends AppCompatActivity {
                         for(Map.Entry<String,JsonElement> entry : entrySet){
                             userFormCheckPoints.put(entry.getKey(), jsonObject.get(entry.getKey()).getAsBoolean());
                         }
-                        int size=0;
-                        for(Map.Entry<String,JsonElement> entry : entrySet){
-                            userFormCheckPoints.put(entry.getKey(), jsonObject.get(entry.getKey()).getAsBoolean());
+                        int size=1;
+                        for(Map.Entry<String, Boolean> entry:userFormCheckPoints.entrySet()){
+                            size++;
+                            if(!entry.getValue()){
+                                break;
+                            }
+                        }
+                        if(size==2){
+                            stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
+                        }
+                        else if(size==3){
+                            stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
+                        }
+                        else if(size==4){
+                            stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
+                        }
+                        else{
+                            stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                         }
 
                     } catch (IOException e) {
@@ -220,6 +238,11 @@ public class FormStatusActivity extends AppCompatActivity {
                 Toast.makeText(App.getApp(), "Something went wrong! Try Again..", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    public void getUserTimeStamps(){
+
     }
 
     public class ClickHandlers {
