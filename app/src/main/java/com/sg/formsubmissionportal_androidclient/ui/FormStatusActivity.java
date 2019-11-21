@@ -2,6 +2,7 @@ package com.sg.formsubmissionportal_androidclient.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -28,7 +29,10 @@ import com.sg.formsubmissionportal_androidclient.ui.MainActivity.MainActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -75,6 +79,7 @@ public class FormStatusActivity extends AppCompatActivity {
         if (i.getExtras() != null) {
             form = i.getParcelableExtra("form");
         }
+        getSupportActionBar().setTitle("Form Status");
         MainActivity.getComponent().inject(FormStatusActivity.this);
         formStatusBinding = DataBindingUtil.setContentView(FormStatusActivity.this, R.layout.activity_form_status);
         formStatusBinding.setClickHandlers(new ClickHandlers());
@@ -94,15 +99,17 @@ public class FormStatusActivity extends AppCompatActivity {
         facultyNo = formStatusBinding.formDetailFacultyNo;
         enrollmentNo = formStatusBinding.formDetailEnrollmentNo;
         phoneNumber=formStatusBinding.formDetailPhoneNo;
+        stateProgressBar.setMaxDescriptionLine(4);
 
         formTitle.setText(form.getTitle());
         formDepartment.setText("Department: " + form.getDepartment());
         formCode.setText("Form Code: " + form.getFormCode());
+        checkPoints=new ArrayList<>();
 
         getFormDetails();
+        getUserTimeStamps();
         getFormCheckPoints();
         getUserCheckPoints();
-        getUserTimeStamps();
 
     }
 
@@ -147,16 +154,9 @@ public class FormStatusActivity extends AppCompatActivity {
                         JsonElement jsonElement=new JsonParser().parse(response.body().string());
                         JsonObject jsonObject=jsonElement.getAsJsonObject().get("formCheckPoint").getAsJsonObject();
                         Set<Map.Entry<String, JsonElement>> entrySet = jsonObject.entrySet();
-                        checkPoints=new ArrayList<>();
-                        checkPoints.add("Submit");
                         for(Map.Entry<String,JsonElement> entry : entrySet){
                             formCheckPoints.put(entry.getKey(), jsonObject.get(entry.getKey()).getAsString());
-                            checkPoints.add(entry.getKey());
                         }
-                        int size=formCheckPoints.size()+1;
-                        stateProgressBar.setMaxDescriptionLine(3);
-                        stateProgressBar.setStateDescriptionData(checkPoints);
-                        stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -177,7 +177,6 @@ public class FormStatusActivity extends AppCompatActivity {
 
     public void setFormDetails(){
         if(formDetail!=null){
-            progressBar.setVisibility(View.INVISIBLE);
             progressBar.setIndeterminate(false);
             firstName.setText("First Name: "+formDetail.getFirstName());
             lastName.setText("Last Name: "+formDetail.getLastName());
@@ -242,7 +241,49 @@ public class FormStatusActivity extends AppCompatActivity {
 
 
     public void getUserTimeStamps(){
+        formService.getTimestampsForUserChecPoints(form.getFormCode(),MainActivity.userid.toString()).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code()==200){
+                    JsonElement jsonElement= null;
+                    try {
+                        jsonElement = new JsonParser().parse(response.body().string());
+                        JsonObject jsonObject=jsonElement.getAsJsonObject().get("formTimestamps").getAsJsonObject();
+                        Set<Map.Entry<String, JsonElement>> entrySet = jsonObject.entrySet();
+                        checkPoints.clear();
+                        checkPoints.add("Submit");
+                        for(Map.Entry<String,JsonElement> entry : entrySet){
+                            formTimestamps.put(entry.getKey(), jsonObject.get(entry.getKey()).getAsString());
+                            Long abc=jsonObject.get(entry.getKey()).getAsLong();
+                            if(abc!=0) {
+                                Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+                                cal.setTimeInMillis(abc * 1000);
+                                String day = DateFormat.format("EEE", cal).toString();
+                                String date = DateFormat.format("MMM/dd/yy", cal).toString();
+                                String time = DateFormat.format("h:mm a", cal).toString();
+                                checkPoints.add(entry.getKey() + "\n" + day + "\n" + date + "\n" + time);
+                            }
+                        }
+                        progressBar.setVisibility(View.INVISIBLE);
+                        stateProgressBar.setStateDescriptionData(checkPoints);
+                        stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if(response.code()==404){
+                    Toast.makeText(FormStatusActivity.this,"Form not found!",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(App.getApp(), "Access Denied! ", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(App.getApp(), "Something went wrong! Try Again..", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public class ClickHandlers {

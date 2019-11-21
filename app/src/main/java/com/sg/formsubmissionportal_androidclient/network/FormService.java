@@ -35,4 +35,8 @@ public interface FormService {
 
     @GET("forms/get-form-checkpoints/{formCode}/{userid}")
     Call<ResponseBody> getFormCheckpointsForAUserDetail(@Path("formCode")String formCode,@Path("userid")String userid);
+
+    @GET("forms/get-form-timestamps/{formCode}/{userid}")
+    Call<ResponseBody> getTimestampsForUserChecPoints(@Path("formCode") String formCode, @Path("userid") String userid);
+
 }
