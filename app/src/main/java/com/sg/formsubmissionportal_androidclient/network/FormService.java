@@ -28,4 +28,11 @@ public interface FormService {
 
     @GET("forms/get-all-formDetails/{formCode}")
     Call<ResponseBody> getAllFormDetails(@Path("formCode") String formCode);
+
+
+    @GET("forms/get-form-checkpoints/{formCode}")
+    Call<ResponseBody> getFormCheckpoints(@Path("formCode") String formCode);
+
+    @GET("forms/get-form-checkpoints/{formCode}/{userid}")
+    Call<ResponseBody> getFormCheckpointsForAUserDetail(@Path("formCode")String formCode,@Path("userid")String userid);
 }
