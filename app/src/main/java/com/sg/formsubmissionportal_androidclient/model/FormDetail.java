@@ -34,7 +34,7 @@ public class FormDetail implements Serializable, Parcelable
     private String enrollmentNumber;
     @SerializedName("form")
     @Expose
-    private Integer form;
+    private Object form;
     public final static Parcelable.Creator<FormDetail> CREATOR = new Creator<FormDetail>() {
 
 
@@ -49,9 +49,9 @@ public class FormDetail implements Serializable, Parcelable
             return (new FormDetail[size]);
         }
 
-    }
-            ;
-    private final static long serialVersionUID = -294036954477263369L;
+    };
+
+    private final static long serialVersionUID = -5935552539460235241L;
 
     protected FormDetail(Parcel in) {
         this.id = ((Long) in.readValue((Long.class.getClassLoader())));
@@ -61,7 +61,7 @@ public class FormDetail implements Serializable, Parcelable
         this.email = ((String) in.readValue((String.class.getClassLoader())));
         this.phoneNumber = ((String) in.readValue((String.class.getClassLoader())));
         this.enrollmentNumber = ((String) in.readValue((String.class.getClassLoader())));
-        this.form = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.form = ((Object) in.readValue((Object.class.getClassLoader())));
     }
 
     public FormDetail() {
@@ -123,15 +123,15 @@ public class FormDetail implements Serializable, Parcelable
         this.enrollmentNumber = enrollmentNumber;
     }
 
-    public Integer getForm() {
+    public Object getForm() {
         return form;
     }
 
-    public void setForm(Integer form) {
+    public void setForm(Object form) {
         this.form = form;
     }
 
-    public void writeToParcel(Parcel dest, int flags) {
+        public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(id);
         dest.writeValue(firstName);
         dest.writeValue(lastName);

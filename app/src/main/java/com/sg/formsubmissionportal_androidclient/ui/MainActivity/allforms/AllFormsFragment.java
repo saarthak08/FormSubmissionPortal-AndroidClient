@@ -81,7 +81,7 @@ public class AllFormsFragment extends Fragment {
     }
 
     public void loadView() {
-        formsAdapter = new FormsAdapter(formsList);
+        formsAdapter = new FormsAdapter(formsList,"AllForms",getContext());
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

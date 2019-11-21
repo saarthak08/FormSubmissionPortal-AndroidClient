@@ -20,4 +20,12 @@ public interface FormService {
 
     @GET("forms/get-all-forms")
     Call<ResponseBody> getAllForms();
+
+
+    @GET("forms/get-formDetails/{formCode}")
+    Call<ResponseBody> getMyFormDetails(@Path("formCode") String formCode);
+
+
+    @GET("forms/get-all-formDetails/{formCode}")
+    Call<ResponseBody> getAllFormDetails(@Path("formCode") String formCode);
 }

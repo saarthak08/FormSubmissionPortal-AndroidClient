@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="ClickHandlers"
+            type="com.sg.formsubmissionportal_androidclient.ui.FormStatusActivity.ClickHandlers"/>
+    </data>
+
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".ui.FormStatusActivity">
+
+
+    <TextView
+        android:id="@+id/form_title_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_24x"
+        android:fontFamily="@font/artifika"
+        android:padding="@dimen/dimen_4x"
+        android:text="Form Title"
+        android:textSize="@dimen/text_24x"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/form_department_status"
+        android:padding="@dimen/dimen_4x"
+        android:textSize="@dimen/text_16x"
+        android:layout_margin="@dimen/dimen_4x"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Form Department" />
+
+    <TextView
+        android:id="@+id/form_code_status"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/text_16x"
+        android:layout_margin="@dimen/dimen_4x"
+        android:padding="@dimen/dimen_4x"
+        android:layout_height="wrap_content"
+        android:text="Form Code" />
+
+    <com.kofigyan.stateprogressbar.StateProgressBar
+        android:id="@+id/form_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_4x"
+        android:padding="@dimen/dimen_8x"
+        app:spb_animateToCurrentProgressState="true"
+        app:spb_checkStateCompleted="true"
+        app:spb_currentStateDescriptionColor="#009688"
+        app:spb_currentStateNumber="three"
+        app:spb_maxStateNumber="four"
+        app:spb_justifyMultilineDescription="true"
+        app:spb_stateLineThickness="@dimen/dimen_8x"
+        app:spb_stateTextSize="@dimen/text_24x"
+        app:spb_stateSize="@dimen/dimen_32x"
+        app:spb_stateBackgroundColor="#BDBDBD"
+        app:spb_stateDescriptionColor="#808080"
+        app:spb_stateForegroundColor="@color/colorPrimaryDark"
+        app:spb_stateNumberBackgroundColor="@color/colorAccent"
+        app:spb_stateNumberForegroundColor="@color/gradient_4_start" />
+
+    <ProgressBar
+        android:id="@+id/progressBarStatus"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+
+
+    <TextView
+        android:id="@+id/form_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/dimen_4x"
+        android:layout_marginTop="@dimen/dimen_8x"
+        android:fontFamily="@font/almendra_display"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/dimen_4x"
+        android:text="Form Details"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+
+
+
+    <TextView
+        android:id="@+id/form_detail_firstName"
+        android:layout_width="match_parent"
+        android:textSize="20sp"
+        android:layout_margin="@dimen/dimen_4x"
+        android:padding="@dimen/dimen_4x"
+        android:layout_height="wrap_content"
+        android:text="First Name" />
+
+
+    <TextView
+        android:id="@+id/form_detail_lastName"
+        android:layout_width="match_parent"
+        android:textSize="20sp"
+        android:layout_margin="@dimen/dimen_4x"
+        android:padding="@dimen/dimen_4x"
+        android:layout_height="wrap_content"
+        android:text="Last Name" />
+
+    <TextView
+        android:id="@+id/form_detail_email"
+        android:layout_width="match_parent"
+        android:textSize="20sp"
+        android:layout_margin="@dimen/dimen_4x"
+        android:padding="@dimen/dimen_4x"
+        android:layout_height="wrap_content"
+        android:text="Email" />
+
+    <TextView
+        android:id="@+id/form_detail_phoneNo"
+        android:layout_width="match_parent"
+        android:textSize="20sp"
+        android:layout_margin="@dimen/dimen_4x"
+        android:padding="@dimen/dimen_4x"
+        android:layout_height="wrap_content"
+        android:text="Phone Number" />
+
+    <TextView
+        android:id="@+id/form_detail_facultyNo"
+        android:layout_width="match_parent"
+        android:textSize="20sp"
+        android:padding="@dimen/dimen_4x"
+        android:layout_margin="@dimen/dimen_4x"
+        android:layout_height="wrap_content"
+        android:text="Faculty Number" />
+
+
+    <TextView
+        android:id="@+id/form_detail_enrollmentNo"
+        android:layout_width="match_parent"
+        android:textSize="20sp"
+        android:layout_margin="@dimen/dimen_4x"
+        android:padding="@dimen/dimen_4x"
+        android:layout_height="wrap_content"
+        android:text="Enrollment Number" />
+
+</LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
+</layout>
