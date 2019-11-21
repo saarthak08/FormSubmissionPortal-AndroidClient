@@ -68,40 +68,42 @@ public class MyFormsFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ArrayList<Form> forms=new ArrayList<>();
-                forms=myFormsViewModel.getMyForms().getValue();
-                if(forms!=null){
-                    formsList=forms;
-                    loadView();
-                }
+                ArrayList<Form> forms = new ArrayList<>();
+                forms = myFormsViewModel.getMyForms().getValue();
+                formsList = forms;
+                loadView();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
+    checkList();
     }
 
-    public void loadView(){
+    public void loadView() {
         formsAdapter = new FormsAdapter(formsList);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(formsAdapter);
-        if (formsList == null) {
-            progressBar.setVisibility(View.INVISIBLE);
-            progressBar.setIndeterminate(false);
+        checkList();
+    }
+
+    public void checkList()
+    {
+        if(formsList==null){
             textView.setVisibility(View.VISIBLE);
-        } else {
-            if (formsList.size() == 0) {
-                progressBar.setVisibility(View.INVISIBLE);
-                progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.GONE);
+            progressBar.setIndeterminate(false);
+        }
+        else{
+            if(formsList.size()==0){
                 textView.setVisibility(View.VISIBLE);
-            } else {
-                progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.GONE);
                 progressBar.setIndeterminate(false);
+            }
+            else{
                 textView.setVisibility(View.INVISIBLE);
             }
         }
     }
-
 
 }

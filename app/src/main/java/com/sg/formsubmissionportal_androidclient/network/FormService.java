@@ -18,5 +18,6 @@ public interface FormService {
     Call<ResponseBody> getUserForms(@Path("userid") String userid);
 
 
-
+    @GET("forms/get-all-forms")
+    Call<ResponseBody> getAllForms();
 }

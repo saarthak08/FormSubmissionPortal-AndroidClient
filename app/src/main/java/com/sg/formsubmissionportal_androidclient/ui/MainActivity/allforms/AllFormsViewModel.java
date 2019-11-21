@@ -54,10 +54,11 @@ public class AllFormsViewModel extends ViewModel {
 
 
     public LiveData<ArrayList<Form>> getAllForms() {
-    /*    formService.getAllForms(MainActivity.userid.toString()).enqueue(new Callback<ResponseBody>() {
+
+        formService.getAllForms().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200) {
+                if(response.code()==200){
                     JsonObject jsonObject = null;
                     try {
                         JsonParser jsonParser=new JsonParser();
@@ -78,14 +79,11 @@ public class AllFormsViewModel extends ViewModel {
                     Toast.makeText(App.getApp(), "Access Denied! ", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(App.getApp(), "Something went wrong! Try Again..", Toast.LENGTH_SHORT).show();
             }
         });
-
-     */
         return forms;
     }
 }

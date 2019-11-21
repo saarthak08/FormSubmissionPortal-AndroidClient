@@ -45,7 +45,7 @@ public class MyFormsViewModel extends ViewModel {
     }
 
     public void setText() {
-        mText.setValue("Hey! You have currently no forms. Please choose & submit your desired forms from the \'All Forms\' section.");
+        mText.setValue("Hey! Check your internet connection or you have currently no forms. Please choose & submit your desired forms from the \'All Forms\' section.");
     }
 
     public LiveData<String> getText() {
