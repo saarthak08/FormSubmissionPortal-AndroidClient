@@ -16,6 +16,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.kofigyan.stateprogressbar.StateProgressBar;
 import com.sg.formsubmissionportal_androidclient.R;
 import com.sg.formsubmissionportal_androidclient.databinding.ActivityFormStatusBinding;
 import com.sg.formsubmissionportal_androidclient.di.App;
@@ -27,6 +28,9 @@ import com.sg.formsubmissionportal_androidclient.ui.MainActivity.MainActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -51,6 +55,10 @@ public class FormStatusActivity extends AppCompatActivity {
     private TextView phoneNumber;
     private FormDetail formDetail;
     private ActivityFormStatusBinding formStatusBinding;
+    private Map<String,String> formCheckPoints;
+    private Map<String, Boolean> userFormCheckPoints;
+    private StateProgressBar stateProgressBar;
+    private ArrayList<String> checkPoints;
 
 
     @Inject
@@ -72,7 +80,10 @@ public class FormStatusActivity extends AppCompatActivity {
         progressBar=formStatusBinding.progressBarStatus;
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(false);
+        formCheckPoints=new HashMap<>();
+        userFormCheckPoints=new HashMap<>();
         formTitle = formStatusBinding.formTitleStatus;
+        stateProgressBar=formStatusBinding.formStatus;
         formDepartment = formStatusBinding.formDepartmentStatus;
         formCode = formStatusBinding.formCodeStatus;
         firstName = formStatusBinding.formDetailFirstName;
@@ -87,6 +98,8 @@ public class FormStatusActivity extends AppCompatActivity {
         formCode.setText("Form Code: " + form.getFormCode());
 
         getFormDetails();
+        getFormCheckPoints();
+        getUserCheckPoints();
 
     }
 
@@ -122,6 +135,43 @@ public class FormStatusActivity extends AppCompatActivity {
     }
 
 
+    public void getFormCheckPoints(){
+        formService.getFormCheckpoints(form.getFormCode()).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code()==200){
+                    try {
+                        JsonElement jsonElement=new JsonParser().parse(response.body().string());
+                        JsonObject jsonObject=jsonElement.getAsJsonObject().get("formCheckPoint").getAsJsonObject();
+                        Set<Map.Entry<String, JsonElement>> entrySet = jsonObject.entrySet();
+                        checkPoints=new ArrayList<>();
+                        checkPoints.add("Submit");
+                        for(Map.Entry<String,JsonElement> entry : entrySet){
+                            formCheckPoints.put(entry.getKey(), jsonObject.get(entry.getKey()).getAsString());
+                            checkPoints.add(entry.getKey());
+                        }
+                        int size=formCheckPoints.size()+1;
+                        stateProgressBar.setMaxDescriptionLine(3);
+                        stateProgressBar.setStateDescriptionData(checkPoints);
+                        stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                } else{
+                    Toast.makeText(FormStatusActivity.this,"Form not found!",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(App.getApp(), "Something went wrong! Try Again..", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
     public void setFormDetails(){
         if(formDetail!=null){
             progressBar.setVisibility(View.INVISIBLE);
@@ -133,6 +183,43 @@ public class FormStatusActivity extends AppCompatActivity {
             facultyNo.setText("Faculty Number: "+formDetail.getFacultyNumber());
             enrollmentNo.setText("Enrollment Number: "+formDetail.getEnrollmentNumber());
         }
+    }
+
+    public void getUserCheckPoints(){
+        formService.getFormCheckpointsForAUserDetail(form.getFormCode(),MainActivity.userid.toString()).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.code()==200){
+                    JsonElement jsonElement= null;
+                    try {
+                        jsonElement = new JsonParser().parse(response.body().string());
+                        JsonObject jsonObject=jsonElement.getAsJsonObject().get("formCheckPoints").getAsJsonObject();
+                        Set<Map.Entry<String, JsonElement>> entrySet = jsonObject.entrySet();
+                        for(Map.Entry<String,JsonElement> entry : entrySet){
+                            userFormCheckPoints.put(entry.getKey(), jsonObject.get(entry.getKey()).getAsBoolean());
+                        }
+                        int size=0;
+                        for(Map.Entry<String,JsonElement> entry : entrySet){
+                            userFormCheckPoints.put(entry.getKey(), jsonObject.get(entry.getKey()).getAsBoolean());
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if(response.code()==404){
+                    Toast.makeText(FormStatusActivity.this,"Form not found!",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(App.getApp(), "Access Denied! ", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(App.getApp(), "Something went wrong! Try Again..", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public class ClickHandlers {
