@@ -2,6 +2,7 @@ package com.sg.formsubmissionportal_androidclient.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -109,7 +110,13 @@ public class FormStatusActivity extends AppCompatActivity {
         getFormDetails();
         getUserTimeStamps();
         getFormCheckPoints();
-        getUserCheckPoints();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getUserCheckPoints();
+
+            }
+        },500);
 
     }
 
@@ -219,6 +226,7 @@ public class FormStatusActivity extends AppCompatActivity {
                         else{
                             stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                         }
+                        progressBar.setVisibility(View.INVISIBLE);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -250,7 +258,6 @@ public class FormStatusActivity extends AppCompatActivity {
                         jsonElement = new JsonParser().parse(response.body().string());
                         JsonObject jsonObject=jsonElement.getAsJsonObject().get("formTimestamps").getAsJsonObject();
                         Set<Map.Entry<String, JsonElement>> entrySet = jsonObject.entrySet();
-                        checkPoints.clear();
                         checkPoints.add("Submit");
                         for(Map.Entry<String,JsonElement> entry : entrySet){
                             formTimestamps.put(entry.getKey(), jsonObject.get(entry.getKey()).getAsString());
@@ -263,10 +270,12 @@ public class FormStatusActivity extends AppCompatActivity {
                                 String time = DateFormat.format("h:mm a", cal).toString();
                                 checkPoints.add(entry.getKey() + "\n" + day + "\n" + date + "\n" + time);
                             }
+                            else {
+                                checkPoints.add(entry.getKey());
+                            }
                         }
-                        progressBar.setVisibility(View.INVISIBLE);
+                        checkPoints.add("Successful");
                         stateProgressBar.setStateDescriptionData(checkPoints);
-                        stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
