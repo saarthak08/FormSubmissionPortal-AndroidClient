@@ -35,6 +35,10 @@ public class FormDetail implements Serializable, Parcelable
     @SerializedName("form")
     @Expose
     private Object form;
+    @SerializedName("status")
+    @Expose
+    private Boolean status;
+
     public final static Parcelable.Creator<FormDetail> CREATOR = new Creator<FormDetail>() {
 
 
@@ -62,9 +66,18 @@ public class FormDetail implements Serializable, Parcelable
         this.phoneNumber = ((String) in.readValue((String.class.getClassLoader())));
         this.enrollmentNumber = ((String) in.readValue((String.class.getClassLoader())));
         this.form = ((Object) in.readValue((Object.class.getClassLoader())));
+        this.status=((Boolean) in.readValue(Boolean.class.getClassLoader()));
     }
 
     public FormDetail() {
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public Long getId() {
@@ -140,6 +153,7 @@ public class FormDetail implements Serializable, Parcelable
         dest.writeValue(phoneNumber);
         dest.writeValue(enrollmentNumber);
         dest.writeValue(form);
+        dest.writeValue(status);
     }
 
     public int describeContents() {

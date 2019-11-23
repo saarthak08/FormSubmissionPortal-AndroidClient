@@ -11,6 +11,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface FormService {
 
@@ -37,6 +38,13 @@ public interface FormService {
     Call<ResponseBody> getFormCheckpointsForAUserDetail(@Path("formCode")String formCode,@Path("userid")String userid);
 
     @GET("forms/get-form-timestamps/{formCode}/{userid}")
-    Call<ResponseBody> getTimestampsForUserChecPoints(@Path("formCode") String formCode, @Path("userid") String userid);
+    Call<ResponseBody> getTimestampsForUserCheckPoints(@Path("formCode") String formCode, @Path("userid") String userid);
+
+
+    @GET("forms/checkFormStatus/{formCode}/{userid}")
+    Call<ResponseBody> checkFormStatus(@Path("formCode") String formCode, @Path("userid") String userid);
+
+    @POST("forms/checkForm")
+    Call<ResponseBody> checkForm( JsonObject jsonObject);
 
 }
