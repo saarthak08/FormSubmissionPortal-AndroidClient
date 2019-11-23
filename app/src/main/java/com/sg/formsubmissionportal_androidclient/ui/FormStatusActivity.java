@@ -1,11 +1,16 @@
 package com.sg.formsubmissionportal_androidclient.ui;
 
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,7 +70,9 @@ public class FormStatusActivity extends AppCompatActivity {
     private StateProgressBar stateProgressBar;
     private ArrayList<String> checkPoints;
     private Map<String,String> formTimestamps;
-
+    private ImageView imageView;
+    private Animation fadeIn;
+    private TextView textView;
 
     @Inject
     @Named("formService")
@@ -88,6 +95,9 @@ public class FormStatusActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(false);
         formCheckPoints=new HashMap<>();
+        fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
+        fadeIn.setDuration(1000);
         userFormCheckPoints=new HashMap<>();
         formTimestamps=new HashMap<>();
         formTitle = formStatusBinding.formTitleStatus;
@@ -96,6 +106,8 @@ public class FormStatusActivity extends AppCompatActivity {
         formCode = formStatusBinding.formCodeStatus;
         firstName = formStatusBinding.formDetailFirstName;
         lastName = formStatusBinding.formDetailLastName;
+        imageView = formStatusBinding.imageViewCheck;
+        textView = formStatusBinding.verified;
         email = formStatusBinding.formDetailEmail;
         facultyNo = formStatusBinding.formDetailFacultyNo;
         enrollmentNo = formStatusBinding.formDetailEnrollmentNo;
@@ -207,9 +219,11 @@ public class FormStatusActivity extends AppCompatActivity {
                             userFormCheckPoints.put(entry.getKey(), jsonObject.get(entry.getKey()).getAsBoolean());
                         }
                         int size=1;
+                        boolean flag=false;
                         for(Map.Entry<String, Boolean> entry:userFormCheckPoints.entrySet()){
                             size++;
                             if(!entry.getValue()){
+                                flag=true;
                                 break;
                             }
                         }
@@ -226,12 +240,19 @@ public class FormStatusActivity extends AppCompatActivity {
                         {
                             stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                         }
-                        if(size== entrySet.size()+1){
+                        if(!flag){
                             stateProgressBar.setAllStatesCompleted(true);
+                            textView.setText("Verified & Submitted Successfully!");
+                            textView.setVisibility(View.VISIBLE);
+                            textView.setAnimation(fadeIn);
+                            imageView.setVisibility(View.VISIBLE);
+                            imageView.setAnimation(fadeIn);
+                            ((Animatable) imageView.getDrawable()).start();
                         }
                         stateProgressBar.enableAnimationToCurrentState(true);
                         stateProgressBar.checkStateCompleted(true);
                         progressBar.setVisibility(View.INVISIBLE);
+
 
                     } catch (IOException e) {
                         e.printStackTrace();

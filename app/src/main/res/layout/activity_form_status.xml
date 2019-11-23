@@ -151,6 +151,28 @@
         android:layout_height="wrap_content"
         android:text="Enrollment Number" />
 
+    <ImageView
+        android:id="@+id/imageViewCheck"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/dimen_8x"
+        app:srcCompat="@drawable/animated_check" />
+
+    <TextView
+        android:id="@+id/verified"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/dimen_8x"
+        android:fontFamily="@font/new_rocker"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/dimen_4x"
+        android:text="Verified!"
+        android:textSize="24sp"
+        android:visibility="gone" />
+
 </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
