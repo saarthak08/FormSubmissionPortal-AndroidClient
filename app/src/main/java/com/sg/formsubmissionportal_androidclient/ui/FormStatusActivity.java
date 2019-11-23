@@ -100,9 +100,8 @@ public class FormStatusActivity extends AppCompatActivity {
         facultyNo = formStatusBinding.formDetailFacultyNo;
         enrollmentNo = formStatusBinding.formDetailEnrollmentNo;
         phoneNumber=formStatusBinding.formDetailPhoneNo;
-        stateProgressBar.setMaxDescriptionLine(4);
-
         formTitle.setText(form.getTitle());
+        stateProgressBar.setMaxDescriptionLine(4);
         formDepartment.setText("Department: " + form.getDepartment());
         formCode.setText("Form Code: " + form.getFormCode());
         checkPoints=new ArrayList<>();
@@ -114,9 +113,8 @@ public class FormStatusActivity extends AppCompatActivity {
             @Override
             public void run() {
                 getUserCheckPoints();
-
             }
-        },500);
+        },1000);
 
     }
 
@@ -164,6 +162,7 @@ public class FormStatusActivity extends AppCompatActivity {
                         for(Map.Entry<String,JsonElement> entry : entrySet){
                             formCheckPoints.put(entry.getKey(), jsonObject.get(entry.getKey()).getAsString());
                         }
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -223,9 +222,15 @@ public class FormStatusActivity extends AppCompatActivity {
                         else if(size==4){
                             stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
                         }
-                        else{
+                        else if(size==5)
+                        {
                             stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                         }
+                        if(size== entrySet.size()+1){
+                            stateProgressBar.setAllStatesCompleted(true);
+                        }
+                        stateProgressBar.enableAnimationToCurrentState(true);
+                        stateProgressBar.checkStateCompleted(true);
                         progressBar.setVisibility(View.INVISIBLE);
 
                     } catch (IOException e) {
@@ -259,23 +264,43 @@ public class FormStatusActivity extends AppCompatActivity {
                         JsonObject jsonObject=jsonElement.getAsJsonObject().get("formTimestamps").getAsJsonObject();
                         Set<Map.Entry<String, JsonElement>> entrySet = jsonObject.entrySet();
                         checkPoints.add("Submit");
+                        int size=1;
                         for(Map.Entry<String,JsonElement> entry : entrySet){
+                            size++;
                             formTimestamps.put(entry.getKey(), jsonObject.get(entry.getKey()).getAsString());
-                            Long abc=jsonObject.get(entry.getKey()).getAsLong();
+                            Long abc=0L;
+                            try {
+                                abc = jsonObject.get(entry.getKey()).getAsLong();
+                            }
+                            catch (Exception e){
+                            }
                             if(abc!=0) {
                                 Calendar cal = Calendar.getInstance(Locale.ENGLISH);
                                 cal.setTimeInMillis(abc * 1000);
                                 String day = DateFormat.format("EEE", cal).toString();
-                                String date = DateFormat.format("MMM/dd/yy", cal).toString();
+                                String date = DateFormat.format("MMM-dd/yy", cal).toString();
                                 String time = DateFormat.format("h:mm a", cal).toString();
-                                checkPoints.add(entry.getKey() + "\n" + day + "\n" + date + "\n" + time);
+                                checkPoints.add(entry.getKey() + "\n" + date + "\n" + day + "\n" + time);
                             }
                             else {
                                 checkPoints.add(entry.getKey());
                             }
+                            stateProgressBar.enableAnimationToCurrentState(true);
+                            stateProgressBar.checkStateCompleted(true);
+                            if(size==2){
+                                stateProgressBar.setMaxStateNumber(StateProgressBar.StateNumber.TWO);
+                            }
+                            else if(size==3){
+                                stateProgressBar.setMaxStateNumber(StateProgressBar.StateNumber.THREE);
+                            }
+                            else if(size==4){
+                                stateProgressBar.setMaxStateNumber(StateProgressBar.StateNumber.FOUR);
+                            }
+                            else if(size==5){
+                                stateProgressBar.setMaxStateNumber(StateProgressBar.StateNumber.FIVE);
+                            }
+                            stateProgressBar.setStateDescriptionData(checkPoints);
                         }
-                        checkPoints.add("Successful");
-                        stateProgressBar.setStateDescriptionData(checkPoints);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

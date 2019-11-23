@@ -15,4 +15,5 @@
     <dimen name="text_64x">64sp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">240dp</dimen>
+    <dimen name="usage_item_border_width">1dp</dimen>
 </resources>
