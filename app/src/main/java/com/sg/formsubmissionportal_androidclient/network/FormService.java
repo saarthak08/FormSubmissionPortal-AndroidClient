@@ -35,14 +35,14 @@ public interface FormService {
     Call<ResponseBody> getFormCheckpoints(@Path("formCode") String formCode);
 
     @GET("forms/get-form-checkpoints/{formCode}/{userid}")
-    Call<ResponseBody> getFormCheckpointsForAUserDetail(@Path("formCode")String formCode,@Path("userid")String userid);
+    Call<ResponseBody> getFormCheckpointsForAUserDetail(@Path("formCode")String formCode,@Path("userid") Long userid);
 
     @GET("forms/get-form-timestamps/{formCode}/{userid}")
-    Call<ResponseBody> getTimestampsForUserCheckPoints(@Path("formCode") String formCode, @Path("userid") String userid);
+    Call<ResponseBody> getTimestampsForUserCheckPoints(@Path("formCode") String formCode, @Path("userid") Long userid);
 
 
     @GET("forms/checkFormStatus/{formCode}/{userid}")
-    Call<ResponseBody> checkFormStatus(@Path("formCode") String formCode, @Path("userid") String userid);
+    Call<ResponseBody> checkFormStatus(@Path("formCode") String formCode, @Path("userid") Long userid);
 
     @POST("forms/checkForm")
     Call<ResponseBody> checkForm( JsonObject jsonObject);

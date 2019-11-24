@@ -24,6 +24,9 @@ import com.sg.formsubmissionportal_androidclient.R;
 import com.sg.formsubmissionportal_androidclient.di.component.DaggerMainActivityComponent;
 import com.sg.formsubmissionportal_androidclient.di.component.MainActivityComponent;
 import com.sg.formsubmissionportal_androidclient.di.module.OtherNetworkServicesModule;
+import com.sg.formsubmissionportal_androidclient.network.FormService;
+import com.sg.formsubmissionportal_androidclient.network.RetrofitInstance;
+import com.sg.formsubmissionportal_androidclient.network.UserService;
 import com.sg.formsubmissionportal_androidclient.ui.LoginActivity;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -34,6 +37,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.Menu;
 import android.widget.TextView;
+
+import retrofit2.Retrofit;
 
 import static com.sg.formsubmissionportal_androidclient.di.App.PREFER_NAME;
 import static com.sg.formsubmissionportal_androidclient.di.App.PRIVATE_MODE;
@@ -53,8 +58,11 @@ public class MainActivity extends AppCompatActivity {
     public static String email;
     public static String role;
     public static String token;
-    private static MainActivityComponent component;
+    public static FormService formService;
+    public static UserService userService;
     public static Long userid;
+    private static MainActivityComponent component;
+    private static Retrofit retrofit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         role=pref.getString("role","");
         userid=pref.getLong("userid",0);
         token=pref.getString("token","");
-        buildDaggerOtherComponent(token);
+        buildDaggerOtherComponent();
         editor=pref.edit();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         if(role.equals("STUDENT")){
            fab.setVisibility(View.GONE);
         }
+
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_myprofile,R.id.nav_allforms,R.id.nav_myforms)
@@ -90,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        Log.d("MainActivity",pref.getString("email",""));
+        Log.d("MainActivityDon123",pref.getString("email",""));
         swipeRefreshLayout=findViewById(R.id.swipeRefreshLayoutMain);
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.DKGRAY, Color.RED,Color.GREEN,Color.MAGENTA,Color.BLACK,Color.CYAN);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -141,8 +150,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_logout) {
-            editor.clear();
-            editor.commit();
+            editor.clear().apply();
+            editor.clear().commit();
+            editor.remove("firsName").commit();
+            editor.remove("lastName").commit();
+            editor.remove("email").commit();
+            editor.remove("token").commit();
+            editor.remove("userid").commit();
+            editor.remove("role").commit();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             MainActivity.this.finish();
         }
@@ -150,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public static void buildDaggerOtherComponent(String token){
+    public static void buildDaggerOtherComponent(){
         component= DaggerMainActivityComponent.builder()
                 .otherNetworkServicesModule(new OtherNetworkServicesModule(token))
                 .build();
@@ -160,6 +175,8 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivityComponent getComponent(){
         return component;
     }
+
+
 
 
 

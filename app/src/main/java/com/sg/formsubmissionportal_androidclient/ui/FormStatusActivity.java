@@ -283,7 +283,7 @@ public class FormStatusActivity extends AppCompatActivity {
     }
 
     public void getUserCheckPoints() {
-        formService.getFormCheckpointsForAUserDetail(form.getFormCode(), MainActivity.userid.toString()).enqueue(new Callback<ResponseBody>() {
+        formService.getFormCheckpointsForAUserDetail(form.getFormCode(), MainActivity.userid).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
@@ -366,7 +366,7 @@ public class FormStatusActivity extends AppCompatActivity {
 
 
     public void getUserTimeStamps() {
-        formService.getTimestampsForUserCheckPoints(form.getFormCode(), MainActivity.userid.toString()).enqueue(new Callback<ResponseBody>() {
+        formService.getTimestampsForUserCheckPoints(form.getFormCode(), MainActivity.userid).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
@@ -433,7 +433,7 @@ public class FormStatusActivity extends AppCompatActivity {
     }
 
     private void checkFormStatus() {
-        formService.checkFormStatus(form.getFormCode(), MainActivity.userid.toString()).enqueue(new Callback<ResponseBody>() {
+        formService.checkFormStatus(form.getFormCode(), MainActivity.userid).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {

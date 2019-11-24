@@ -1,5 +1,6 @@
 package com.sg.formsubmissionportal_androidclient.ui.MainActivity.myforms;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
@@ -54,6 +55,7 @@ public class MyFormsViewModel extends ViewModel {
 
 
     public LiveData<ArrayList<Form>> getMyForms() {
+        Log.d("MyFormViewModelCall",MainActivity.userid+MainActivity.role);
         formService.getUserForms(MainActivity.userid.toString()).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

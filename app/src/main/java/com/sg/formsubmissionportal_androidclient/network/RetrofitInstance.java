@@ -1,5 +1,7 @@
 package com.sg.formsubmissionportal_androidclient.network;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sg.formsubmissionportal_androidclient.di.App;
@@ -20,16 +22,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RetrofitInstance {
-    private static Retrofit retrofit=null;
+    private static Retrofit retrofit = null;
     private static Retrofit authRetrofit = null;
-    private static final String BASE_URL="http://192.168.43.193:8080/api/";
+    private static final String BASE_URL = "http://192.168.43.193:8080/api/";
     private static final int REQUEST_TIMEOUT = 60;
     private static OkHttpClient okHttpClient;
+    private static String token="";
 
 
-    public static Retrofit getLognSignupClient()
-    {
-        if(okHttpClient==null){
+    public static Retrofit getLognSignupClient() {
+        if (okHttpClient == null) {
             initOkHttp();
         }
 
@@ -38,10 +40,8 @@ public class RetrofitInstance {
                 .create();
 
 
-
-        if(retrofit==null)
-        {
-            retrofit=new Retrofit.Builder().baseUrl(BASE_URL)
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
@@ -62,7 +62,11 @@ public class RetrofitInstance {
     }
 
 
-    public static Retrofit getAuthorizedClient(final String token) {
+    public static Retrofit getAuthorizedClient(String authToken) {
+
+        Log.d("RetrofitInstance", "Bearer " + authToken);
+
+        token=authToken;
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
@@ -74,11 +78,11 @@ public class RetrofitInstance {
 
                 Request request = original.newBuilder()
                         .addHeader("Authorization", "Bearer " + token)
-                        .addHeader("Cache-Control","no-cache")
-                        .method(original.method(), original.body())
-                        //.cacheControl(CacheControl.FORCE_NETWORK)
+                        .addHeader("Cache-Control", "no-cache")
+                        .cacheControl(CacheControl.FORCE_NETWORK)
                         .build();
 
+                Log.d("RetrofitInstance", "Bearer " + token);
                 return chain.proceed(request);
             }
         });
@@ -97,6 +101,6 @@ public class RetrofitInstance {
                     .client(client).build();
         }
         return authRetrofit;
-    }
 
+    }
 }

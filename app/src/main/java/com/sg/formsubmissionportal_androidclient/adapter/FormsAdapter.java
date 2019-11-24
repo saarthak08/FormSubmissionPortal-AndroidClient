@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sg.formsubmissionportal_androidclient.R;
 import com.sg.formsubmissionportal_androidclient.model.Form;
 import com.sg.formsubmissionportal_androidclient.ui.FormStatusActivity;
+import com.sg.formsubmissionportal_androidclient.ui.FormUsersActivity;
+import com.sg.formsubmissionportal_androidclient.ui.MainActivity.MainActivity;
 
 import java.util.ArrayList;
 
@@ -71,11 +73,20 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.MyFormsAdapt
                 @Override
                 public void onClick(View v) {
                     if(fragment.equals("MyForms")){
-                        Intent intent=new Intent(context, FormStatusActivity.class);
-                        int pos=getAdapterPosition();
-                        Form form=forms.get(pos);
-                        intent.putExtra("form",(Parcelable) form);
-                        context.startActivity(intent);
+                        if(MainActivity.role.equals("STUDENT")) {
+                            Intent intent = new Intent(context, FormStatusActivity.class);
+                            int pos = getAdapterPosition();
+                            Form form = forms.get(pos);
+                            intent.putExtra("form", (Parcelable) form);
+                            context.startActivity(intent);
+                        }
+                        else{
+                            Intent intent = new Intent(context, FormUsersActivity.class);
+                            int pos = getAdapterPosition();
+                            Form form = forms.get(pos);
+                            intent.putExtra("form", (Parcelable) form);
+                            context.startActivity(intent);
+                        }
                     }
 
                     if(fragment.equals("AllForms")){
@@ -83,6 +94,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.MyFormsAdapt
                     }
                 }
             });
+
         }
     }
 }

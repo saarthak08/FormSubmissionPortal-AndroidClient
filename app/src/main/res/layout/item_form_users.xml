@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:id="@+id/form_user_CV"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardCornerRadius="4dp"
+    android:padding="@dimen/dimen_4x"
+    android:layout_margin="2dp"
+    card_view:cardElevation="4dp"
+    android:elevation="@dimen/dimen_4x"
+    android:layout_width="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:padding="@dimen/dimen_4x"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/item_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/artifika"
+            android:paddingStart="@dimen/dimen_8x"
+            android:paddingTop="@dimen/dimen_8x"
+            android:paddingEnd="@dimen/dimen_8x"
+            android:text="Title"
+            android:textSize="@dimen/text_24x"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_user_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dimen_8x"
+            android:paddingTop="@dimen/dimen_8x"
+            android:paddingEnd="@dimen/dimen_8x"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/item_formstatus"
+            android:layout_width="match_parent"
+            android:paddingStart="@dimen/dimen_8x"
+            android:paddingTop="@dimen/dimen_8x"
+            android:paddingEnd="@dimen/dimen_8x"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
