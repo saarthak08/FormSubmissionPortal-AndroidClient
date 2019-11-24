@@ -17,6 +17,7 @@ import com.sg.formsubmissionportal_androidclient.model.Form;
 import com.sg.formsubmissionportal_androidclient.ui.FormStatusActivity;
 import com.sg.formsubmissionportal_androidclient.ui.FormUsersActivity;
 import com.sg.formsubmissionportal_androidclient.ui.MainActivity.MainActivity;
+import com.sg.formsubmissionportal_androidclient.ui.SubmitFormActivity;
 
 import java.util.ArrayList;
 
@@ -88,7 +89,13 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.MyFormsAdapt
                     }
 
                     if(fragment.equals("AllForms")){
-
+                        if(MainActivity.role.equals("STUDENT")){
+                            Intent intent = new Intent(context, SubmitFormActivity.class);
+                            int pos = getAdapterPosition();
+                            Form form = forms.get(pos);
+                            intent.putExtra("form", (Parcelable) form);
+                            context.startActivity(intent);
+                        }
                     }
                 }
             });

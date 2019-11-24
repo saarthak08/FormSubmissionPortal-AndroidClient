@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    tools:context=".ui.SubmitFormActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/form_fill_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_24x"
+            android:fontFamily="@font/artifika"
+            android:padding="@dimen/dimen_4x"
+            android:text="Form Title"
+            android:textSize="@dimen/text_24x"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/form_fill_department"
+            android:padding="@dimen/dimen_4x"
+            android:textSize="@dimen/text_16x"
+            android:layout_margin="@dimen/dimen_4x"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Form Department" />
+
+        <TextView
+            android:id="@+id/form_fill_code"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/text_16x"
+            android:layout_margin="@dimen/dimen_4x"
+            android:padding="@dimen/dimen_4x"
+            android:layout_height="wrap_content"
+            android:text="Form Code" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TILfirstName"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/dimen_4x"
+            android:padding="@dimen/dimen_4x"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/dimen_4x"
+                android:textSize="@dimen/text_16x"
+                android:layout_height="wrap_content"
+                android:hint="First Name: " />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TILlasttName"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/dimen_4x"
+            android:padding="@dimen/dimen_4x"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/dimen_4x"
+                android:textSize="@dimen/text_16x"
+                android:layout_height="wrap_content"
+                android:hint="Last Name: " />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TILEmail"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/dimen_4x"
+            android:padding="@dimen/dimen_4x"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/dimen_4x"
+                android:textSize="@dimen/text_16x"
+                android:layout_height="wrap_content"
+                android:hint="Email: " />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TIPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/dimen_4x"
+            android:padding="@dimen/dimen_4x"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/dimen_4x"
+                android:textSize="@dimen/text_16x"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number: " />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TILFacultyNumber"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/dimen_4x"
+            android:padding="@dimen/dimen_4x"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/dimen_4x"
+                android:textSize="@dimen/text_16x"
+                android:layout_height="wrap_content"
+                android:hint="Faculty Number: " />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TILEnrolment"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/dimen_4x"
+            android:padding="@dimen/dimen_4x"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/dimen_4x"
+                android:textSize="@dimen/text_16x"
+                android:layout_height="wrap_content"
+                android:hint="Enrolment Number: " />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:layout_marginTop="@dimen/dimen_16x"
+            android:padding="@dimen/dimen_4x">
+
+
+            <Button
+                android:id="@+id/buttonCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_4x"
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@color/colorPrimary"
+                android:text="Cancel" />
+
+            <Button
+                android:id="@+id/buttonSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_4x"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:text="Submit" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

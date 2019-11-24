@@ -14,8 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.FormUsersActivity"
+        <activity android:name=".ui.SubmitFormActivity"
             android:parentActivityName=".ui.MainActivity.MainActivity"></activity>
+        <activity
+            android:name=".ui.FormUsersActivity"
+            android:parentActivityName=".ui.MainActivity.MainActivity" />
         <activity
             android:name=".ui.FormStatusActivity"
             android:parentActivityName=".ui.MainActivity.MainActivity" />
