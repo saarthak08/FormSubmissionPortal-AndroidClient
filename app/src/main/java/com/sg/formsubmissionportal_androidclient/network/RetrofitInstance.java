@@ -64,8 +64,6 @@ public class RetrofitInstance {
 
     public static Retrofit getAuthorizedClient(String authToken) {
 
-        Log.d("RetrofitInstance", "Bearer " + authToken);
-
         token=authToken;
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -81,8 +79,6 @@ public class RetrofitInstance {
                         .addHeader("Cache-Control", "no-cache")
                         .cacheControl(CacheControl.FORCE_NETWORK)
                         .build();
-
-                Log.d("RetrofitInstance", "Bearer " + token);
                 return chain.proceed(request);
             }
         });

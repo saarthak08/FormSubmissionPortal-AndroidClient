@@ -11,6 +11,13 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
+        <ProgressBar
+            android:id="@+id/progressBarFormUsers"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_form_users"

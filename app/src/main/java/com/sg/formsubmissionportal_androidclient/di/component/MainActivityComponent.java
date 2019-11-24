@@ -3,6 +3,7 @@ package com.sg.formsubmissionportal_androidclient.di.component;
 
 import com.sg.formsubmissionportal_androidclient.di.module.OtherNetworkServicesModule;
 import com.sg.formsubmissionportal_androidclient.ui.FormStatusActivity;
+import com.sg.formsubmissionportal_androidclient.ui.FormUsersActivity;
 import com.sg.formsubmissionportal_androidclient.ui.MainActivity.allforms.AllFormsFragment;
 import com.sg.formsubmissionportal_androidclient.ui.MainActivity.allforms.AllFormsViewModel;
 import com.sg.formsubmissionportal_androidclient.ui.MainActivity.myforms.MyFormsFragment;
@@ -24,5 +25,6 @@ public interface MainActivityComponent {
 
     void inject(FormStatusActivity formStatusActivity);
 
+    void inject(FormUsersActivity formUsersActivity);
 
 }
