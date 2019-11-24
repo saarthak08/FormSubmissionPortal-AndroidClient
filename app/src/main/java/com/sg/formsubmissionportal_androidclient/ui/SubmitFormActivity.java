@@ -41,9 +41,9 @@ public class SubmitFormActivity extends AppCompatActivity {
     private TextView formTitle;
     private TextView formDepartment;
     private TextView formCode;
-    private EditText firstName;
-    private EditText lastName;
-    private EditText email;
+    private TextView firstName;
+    private TextView lastName;
+    private TextView email;
     private EditText facultyNo;
     private EditText enrollmentNo;
     private EditText phoneNumber;
@@ -64,9 +64,9 @@ public class SubmitFormActivity extends AppCompatActivity {
         formTitle=findViewById(R.id.form_fill_title);
         formDepartment=findViewById(R.id.form_fill_department);
         formCode=findViewById(R.id.form_fill_code);
-        firstName=findViewById(R.id.editText_firstName);
-        lastName=findViewById(R.id.editText_lastName);
-        email=findViewById(R.id.editText_email);
+        firstName=findViewById(R.id.form_fill_firstName);
+        lastName=findViewById(R.id.form_fill_lastName);
+        email=findViewById(R.id.form_fill_email);
         facultyNo=findViewById(R.id.editText_facultyNumber);
         enrollmentNo=findViewById(R.id.editText_enrolmentNumber);
         phoneNumber=findViewById(R.id.editText_phoneNumber);
@@ -76,9 +76,9 @@ public class SubmitFormActivity extends AppCompatActivity {
         formDepartment.setText(form.getDepartment());
         formCode.setText(form.getFormCode());
         progressBar=findViewById(R.id.progressBarSubmitForm);
-        firstName.setText(MainActivity.firstName);
-        lastName.setText(MainActivity.lastName);
-        email.setText(MainActivity.email);
+        firstName.setText("First Name: "+ MainActivity.firstName);
+        lastName.setText("Last Name: "+MainActivity.lastName);
+        email.setText("Email: "+MainActivity.email);
         parentLayout = findViewById(android.R.id.content);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +134,8 @@ public class SubmitFormActivity extends AppCompatActivity {
                 }
                 else{
                     Snackbar.make(parentLayout,"Error, empty inputs!",Snackbar.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.INVISIBLE);
+                    progressBar.setIndeterminate(false);
                 }
             }
         });

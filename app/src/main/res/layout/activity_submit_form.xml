@@ -42,58 +42,34 @@
             android:layout_height="wrap_content"
             android:text="Form Code" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/TILfirstName"
+        <TextView
+            android:id="@+id/form_fill_firstName"
             android:layout_width="match_parent"
-            android:layout_margin="@dimen/dimen_4x"
+            android:textSize="@dimen/text_16x"
+            android:layout_margin="@dimen/dimen_8x"
             android:padding="@dimen/dimen_4x"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:text="First Name: " />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_firstName"
-                android:layout_width="match_parent"
-                android:layout_margin="@dimen/dimen_4x"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:textSize="@dimen/text_16x"
-                android:inputType="textPersonName"
-                android:layout_height="wrap_content"
-                android:hint="First Name: " />
-        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+        android:id="@+id/form_fill_lastName"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/text_16x"
+        android:layout_margin="@dimen/dimen_8x"
+        android:padding="@dimen/dimen_4x"
+        android:layout_height="wrap_content"
+        android:text="Last Name: " />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/TILlasttName"
-            android:layout_width="match_parent"
-            android:layout_margin="@dimen/dimen_4x"
-            android:padding="@dimen/dimen_4x"
-            android:layout_height="wrap_content">
+        <TextView
+        android:id="@+id/form_fill_email"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/text_16x"
+        android:layout_margin="@dimen/dimen_8x"
+        android:padding="@dimen/dimen_4x"
+        android:layout_height="wrap_content"
+        android:text="Email: " />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_lastName"
-                android:layout_width="match_parent"
-                android:layout_margin="@dimen/dimen_4x"
-                android:textSize="@dimen/text_16x"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:inputType="textPersonName"
-                android:layout_height="wrap_content"
-                android:hint="Last Name: " />
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/TILEmail"
-            android:layout_width="match_parent"
-            android:layout_margin="@dimen/dimen_4x"
-            android:padding="@dimen/dimen_4x"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_email"
-                android:layout_width="match_parent"
-                android:layout_margin="@dimen/dimen_4x"
-                android:textSize="@dimen/text_16x"
-                android:inputType="textEmailAddress"
-                android:layout_height="wrap_content"
-                android:hint="Email: " />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TIPhoneNumber"
