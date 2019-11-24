@@ -3,6 +3,7 @@ package com.sg.formsubmissionportal_androidclient.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -126,7 +127,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.MyFormsAdapt
                             context.startActivity(intent);
                         } else {
                             int pos = getAdapterPosition();
-                            Form form = forms.get(pos);
+                            final Form form = forms.get(pos);
                             LayoutInflater li = LayoutInflater.from(context);
                             final View promptsView = li.inflate(R.layout.material_dialog_layout, null);
                             final TextView departmentDialog = promptsView.findViewById(R.id.dialog_formDepartment);
@@ -135,7 +136,12 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.MyFormsAdapt
                             final ProgressBar progressBar=promptsView.findViewById(R.id.progressBar_dialog);
                             progressBar.setVisibility(View.VISIBLE);
                             progressBar.setIndeterminate(true);
-                            getFormCheckPoints(form,formCheckpointsDialog,progressBar);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    getFormCheckPoints(form,formCheckpointsDialog,progressBar);
+                                }
+                            },500);
                             final Button getUsers = promptsView.findViewById(R.id.button3);
                             departmentDialog.setText("Form Department: " + form.getDepartment());
                             formCodeDialog.setText("Form Code: " + form.getFormCode());
