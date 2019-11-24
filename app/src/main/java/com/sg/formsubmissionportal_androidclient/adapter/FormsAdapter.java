@@ -45,8 +45,6 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.MyFormsAdapt
         holder.title.setText(forms.get(position).getTitle());
         holder.department.setText(forms.get(position).getDepartment());
         holder.formCode.setText(forms.get(position).getFormCode());
-
-
     }
 
     @Override
