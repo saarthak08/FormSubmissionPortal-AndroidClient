@@ -13,23 +13,36 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.sg.formsubmissionportal_androidclient.R;
+import com.sg.formsubmissionportal_androidclient.ui.MainActivity.MainActivity;
 
 public class MyProfileFragment extends Fragment {
 
-    private MyProfileViewModel myProfileViewModel;
+    private TextView firstName;
+    private TextView lastName;
+    private TextView email;
+    private TextView idNumber;
+    private TextView role;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        myProfileViewModel =
-                ViewModelProviders.of(this).get(MyProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_myprofile, container, false);
-        final TextView textView = root.findViewById(R.id.text_tools);
-        myProfileViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        firstName=view.findViewById(R.id.profile_firstName);
+        lastName=view.findViewById(R.id.profile_lastName);
+        email=view.findViewById(R.id.profile_email);
+        idNumber=view.findViewById(R.id.profile_id);
+        role=view.findViewById(R.id.profile_role);
+        firstName.setText("First Name: "+ MainActivity.firstName);
+        lastName.setText("Last Name: "+MainActivity.lastName);
+        email.setText("Email: "+MainActivity.email);
+        idNumber.setText("ID: "+MainActivity.userid);
+        role.setText("Role: "+MainActivity.role);
     }
 }

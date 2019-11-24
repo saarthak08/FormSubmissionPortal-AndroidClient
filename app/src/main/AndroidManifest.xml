@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.SubmitFormActivity"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".ui.MainActivity.MainActivity"></activity>
         <activity
             android:name=".ui.FormUsersActivity"
             android:parentActivityName=".ui.MainActivity.MainActivity" />
