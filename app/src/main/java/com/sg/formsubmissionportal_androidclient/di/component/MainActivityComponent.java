@@ -1,6 +1,7 @@
 package com.sg.formsubmissionportal_androidclient.di.component;
 
 
+import com.sg.formsubmissionportal_androidclient.adapter.FormsAdapter;
 import com.sg.formsubmissionportal_androidclient.di.module.OtherNetworkServicesModule;
 import com.sg.formsubmissionportal_androidclient.ui.FormStatusActivity;
 import com.sg.formsubmissionportal_androidclient.ui.FormUsersActivity;
@@ -29,4 +30,6 @@ public interface MainActivityComponent {
     void inject(FormUsersActivity formUsersActivity);
 
     void inject(SubmitFormActivity submitFormActivity);
+
+    void inject(FormsAdapter formsAdapter);
 }
