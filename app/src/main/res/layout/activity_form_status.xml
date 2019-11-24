@@ -166,6 +166,7 @@
         android:layout_width="108dp"
         android:layout_height="108dp"
         android:visibility="gone"
+        android:focusableInTouchMode="true"
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/dimen_8x"
         app:srcCompat="@drawable/animated_check" />

@@ -48,7 +48,7 @@ public interface FormService {
 
 
     @POST("forms/checkForm")
-    Call<ResponseBody> checkForm( JsonObject jsonObject);
+    Call<ResponseBody> checkForm( @Body JsonObject jsonObject);
 
 
     @GET("forms/get-form-users/{formCode}")

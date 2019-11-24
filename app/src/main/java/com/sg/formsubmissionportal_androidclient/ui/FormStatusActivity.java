@@ -32,6 +32,7 @@ import com.sg.formsubmissionportal_androidclient.databinding.ActivityFormStatusB
 import com.sg.formsubmissionportal_androidclient.di.App;
 import com.sg.formsubmissionportal_androidclient.model.Form;
 import com.sg.formsubmissionportal_androidclient.model.FormDetail;
+import com.sg.formsubmissionportal_androidclient.model.User;
 import com.sg.formsubmissionportal_androidclient.network.FormService;
 import com.sg.formsubmissionportal_androidclient.ui.MainActivity.MainActivity;
 
@@ -80,6 +81,7 @@ public class FormStatusActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
     private MaterialDialog acceptDialog;
     private MaterialDialog rejectDialog;
+    private User user;
 
     @Inject
     @Named("formService")
@@ -133,6 +135,8 @@ public class FormStatusActivity extends AppCompatActivity {
             acceptButton.setVisibility(View.VISIBLE);
             rejectButton.setVisibility(View.VISIBLE);
             linearLayout.setVisibility(View.VISIBLE);
+            formDetail=i.getParcelableExtra("formDetails");
+            user=i.getParcelableExtra("user");
         } else {
             acceptButton.setVisibility(View.GONE);
             rejectButton.setVisibility(View.GONE);
@@ -186,16 +190,31 @@ public class FormStatusActivity extends AppCompatActivity {
             }
         });
 
-        getFormDetails();
-        checkFormStatus();
-        getUserTimeStamps();
-        getFormCheckPoints();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getUserCheckPoints();
-            }
-        }, 1000);
+        if(formDetail==null) {
+            getFormDetails();
+            checkFormStatus(MainActivity.userid);
+            getUserTimeStamps(MainActivity.userid);
+            getFormCheckPoints();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    getUserCheckPoints(MainActivity.userid);
+                }
+            }, 1000);
+        }
+        else{
+            setFormDetails();
+            checkFormStatus(user.getId());
+            getUserTimeStamps(user.getId());
+            getFormCheckPoints();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    getUserCheckPoints(user.getId());
+                }
+            }, 1000);
+        }
+
 
 
     }
@@ -282,8 +301,8 @@ public class FormStatusActivity extends AppCompatActivity {
         }
     }
 
-    public void getUserCheckPoints() {
-        formService.getFormCheckpointsForAUserDetail(form.getFormCode(), MainActivity.userid).enqueue(new Callback<ResponseBody>() {
+    public void getUserCheckPoints(Long userid) {
+        formService.getFormCheckpointsForAUserDetail(form.getFormCode(), userid).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
@@ -326,6 +345,7 @@ public class FormStatusActivity extends AppCompatActivity {
                             textView.setVisibility(View.VISIBLE);
                             textView.setAnimation(fadeIn);
                             imageView.setVisibility(View.VISIBLE);
+                            imageView.requestFocus();
                             imageView.setAnimation(fadeIn);
                             ((Animatable) imageView.getDrawable()).start();
                         }
@@ -336,6 +356,7 @@ public class FormStatusActivity extends AppCompatActivity {
                             textView.setVisibility(View.VISIBLE);
                             textView.setAnimation(fadeIn);
                             imageView.setVisibility(View.VISIBLE);
+                            imageView.requestFocus();
                             imageView.setAnimation(fadeIn);
                             ((Animatable) imageView.getDrawable()).start();
                         }
@@ -365,8 +386,8 @@ public class FormStatusActivity extends AppCompatActivity {
     }
 
 
-    public void getUserTimeStamps() {
-        formService.getTimestampsForUserCheckPoints(form.getFormCode(), MainActivity.userid).enqueue(new Callback<ResponseBody>() {
+    public void getUserTimeStamps(Long userid) {
+        formService.getTimestampsForUserCheckPoints(form.getFormCode(), userid).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
@@ -432,8 +453,8 @@ public class FormStatusActivity extends AppCompatActivity {
 
     }
 
-    private void checkFormStatus() {
-        formService.checkFormStatus(form.getFormCode(), MainActivity.userid).enqueue(new Callback<ResponseBody>() {
+    private void checkFormStatus(Long userid) {
+        formService.checkFormStatus(form.getFormCode(),userid).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
@@ -485,9 +506,21 @@ public class FormStatusActivity extends AppCompatActivity {
                 if(response.code()==200){
                     if(status){
                         Toast.makeText(FormStatusActivity.this,"Form verified!",Toast.LENGTH_SHORT).show();
+                        acceptButton.setVisibility(View.GONE);
+                        rejectButton.setVisibility(View.GONE);
+                        linearLayout.setVisibility(View.GONE);
+                        textView.setVisibility(View.VISIBLE);
+                        textView.setAnimation(fadeIn);
+                        imageView.setVisibility(View.VISIBLE);
+                        imageView.requestFocus();
+                        imageView.setAnimation(fadeIn);
+                        ((Animatable) imageView.getDrawable()).start();
                     }
                     else{
                         Toast.makeText(FormStatusActivity.this,"Form rejected!",Toast.LENGTH_SHORT).show();
+                        acceptButton.setVisibility(View.GONE);
+                        rejectButton.setVisibility(View.GONE);
+                        linearLayout.setVisibility(View.GONE);
                     }
                 }
                 else if(response.code()==405){

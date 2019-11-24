@@ -153,7 +153,7 @@ public class FormUsersActivity extends AppCompatActivity {
     }
 
     private void initiateView(){
-        formsAdapter = new FormUsersAdapter(formDetails,users,FormUsersActivity.this);
+        formsAdapter = new FormUsersAdapter(formDetails,users,form,FormUsersActivity.this);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(FormUsersActivity.this, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(FormUsersActivity.this));
