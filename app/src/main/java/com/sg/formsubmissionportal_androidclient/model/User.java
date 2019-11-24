@@ -14,27 +14,31 @@ public class User implements Serializable, Parcelable {
     @SerializedName("id")
     @Expose
     private Long id;
+
     @SerializedName("email")
     @Expose
     private String email;
+
     @SerializedName("firstName")
     @Expose
     private String firstName;
+
     @SerializedName("lastName")
     @Expose
     private String lastName;
+
     @SerializedName("enabled")
     @Expose
     private Boolean enabled;
-    @SerializedName("facultyNumber")
+
+    @SerializedName("idNumber")
     @Expose
-    private String facultyNumber;
-    @SerializedName("employeeNumber")
-    @Expose
-    private String employeeNumber;
+    private String idNumber;
+
     @SerializedName("role")
     @Expose
     private Role role;
+
     @SerializedName("forms")
     @Expose
     private List<Form> forms = null;
@@ -61,8 +65,7 @@ public class User implements Serializable, Parcelable {
         this.firstName = ((String) in.readValue((String.class.getClassLoader())));
         this.lastName = ((String) in.readValue((String.class.getClassLoader())));
         this.enabled = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
-        this.facultyNumber = ((String) in.readValue((String.class.getClassLoader())));
-        this.employeeNumber = ((String) in.readValue((String.class.getClassLoader())));
+        this.idNumber = ((String) in.readValue((String.class.getClassLoader())));
         this.role = ((Role) in.readValue((Role.class.getClassLoader())));
         in.readList(this.forms, (Form.class.getClassLoader()));
     }
@@ -110,20 +113,12 @@ public class User implements Serializable, Parcelable {
         this.enabled = enabled;
     }
 
-    public Object getFacultyNumber() {
-        return facultyNumber;
+    public String getIdNumber() {
+        return idNumber;
     }
 
-    public void setFacultyNumber(String facultyNumber) {
-        this.facultyNumber = facultyNumber;
-    }
-
-    public Object getEmployeeNumber() {
-        return employeeNumber;
-    }
-
-    public void setEmployeeNumber(String employeeNumber) {
-        this.employeeNumber = employeeNumber;
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 
     public Role getRole() {
@@ -148,8 +143,7 @@ public class User implements Serializable, Parcelable {
         dest.writeValue(firstName);
         dest.writeValue(lastName);
         dest.writeValue(enabled);
-        dest.writeValue(facultyNumber);
-        dest.writeValue(employeeNumber);
+        dest.writeValue(idNumber);
         dest.writeValue(role);
         dest.writeList(forms);
     }

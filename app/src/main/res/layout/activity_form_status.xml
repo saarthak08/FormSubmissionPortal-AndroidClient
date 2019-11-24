@@ -4,11 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-        <variable
-            name="ClickHandlers"
-            type="com.sg.formsubmissionportal_androidclient.ui.FormStatusActivity.ClickHandlers"/>
-    </data>
 
 
 <androidx.core.widget.NestedScrollView
@@ -195,21 +190,43 @@
         <Button
             android:id="@+id/buttonReject"
             android:layout_width="wrap_content"
-            android:layout_margin="@dimen/dimen_4x"
-            android:background="@color/colorTeal"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_4x"
             android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@color/colorPrimary"
             android:text="Reject" />
 
         <Button
             android:id="@+id/buttonAccept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorTeal"
             android:layout_margin="@dimen/dimen_4x"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_weight="1"
+            android:background="@color/colorPrimary"
             android:text="Accept &amp; Verify" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/getUserDetailsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_8x"
+        android:layout_marginTop="@dimen/dimen_4x"
+        android:layout_marginEnd="@dimen/dimen_8x"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginBottom="@dimen/dimen_4x"
+        android:background="@color/gradient_4_end"
+        android:text="User Details"
+        android:visibility="gone"
+        android:textColor="@color/background_color" />
 
 </LinearLayout>
 

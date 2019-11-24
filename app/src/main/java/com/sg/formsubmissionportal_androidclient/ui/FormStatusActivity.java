@@ -5,6 +5,7 @@ import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateFormat;
+import android.view.Menu;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -82,6 +83,7 @@ public class FormStatusActivity extends AppCompatActivity {
     private MaterialDialog acceptDialog;
     private MaterialDialog rejectDialog;
     private User user;
+    private Button userDetails;
 
     @Inject
     @Named("formService")
@@ -99,7 +101,6 @@ public class FormStatusActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Form Status");
         MainActivity.getComponent().inject(FormStatusActivity.this);
         formStatusBinding = DataBindingUtil.setContentView(FormStatusActivity.this, R.layout.activity_form_status);
-        formStatusBinding.setClickHandlers(new ClickHandlers());
         progressBar = formStatusBinding.progressBarStatus;
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(false);
@@ -114,6 +115,7 @@ public class FormStatusActivity extends AppCompatActivity {
         stateProgressBar = formStatusBinding.formStatus;
         formDepartment = formStatusBinding.formDepartmentStatus;
         formCode = formStatusBinding.formCodeStatus;
+        userDetails = formStatusBinding.getUserDetailsButton;
         firstName = formStatusBinding.formDetailFirstName;
         lastName = formStatusBinding.formDetailLastName;
         imageView = formStatusBinding.imageViewCheck;
@@ -135,6 +137,7 @@ public class FormStatusActivity extends AppCompatActivity {
             acceptButton.setVisibility(View.VISIBLE);
             rejectButton.setVisibility(View.VISIBLE);
             linearLayout.setVisibility(View.VISIBLE);
+            userDetails.setVisibility(View.VISIBLE);
             formDetail=i.getParcelableExtra("formDetails");
             user=i.getParcelableExtra("user");
         } else {
@@ -186,6 +189,18 @@ public class FormStatusActivity extends AppCompatActivity {
                                 rejectDialog.cancel();
                             }
                         })
+                        .show();
+            }
+        });
+
+
+        userDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(FormStatusActivity.this).positiveText("OK")
+                        .title("User Details")
+                        .content("First Name: "+user.getFirstName()+"\nLast Name: "+user.getLastName()+"\nEmail: "+user.getEmail()+
+                                "\nID Number: "+user.getIdNumber()+"\nID: "+user.getId())
                         .show();
             }
         });
@@ -545,7 +560,5 @@ public class FormStatusActivity extends AppCompatActivity {
 
     }
 
-    public class ClickHandlers {
 
-    }
 }
