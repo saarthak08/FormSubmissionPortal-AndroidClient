@@ -37,7 +37,6 @@ public class Form implements Serializable, Parcelable {
         }
 
     };
-    private final static long serialVersionUID = 1893179933495694460L;
 
     protected Form(Parcel in) {
         this.id = ((Long) in.readValue((Long.class.getClassLoader())));

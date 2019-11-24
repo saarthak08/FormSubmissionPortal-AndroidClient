@@ -10,6 +10,7 @@ import com.sg.formsubmissionportal_androidclient.ui.MainActivity.myforms.MyForms
 import com.sg.formsubmissionportal_androidclient.ui.MainActivity.myforms.MyFormsViewModel;
 import com.sg.formsubmissionportal_androidclient.ui.MainActivity.myprofile.MyProfileFragment;
 import com.sg.formsubmissionportal_androidclient.ui.MainActivity.myprofile.MyProfileViewModel;
+import com.sg.formsubmissionportal_androidclient.ui.SubmitFormActivity;
 
 import javax.inject.Singleton;
 
@@ -27,4 +28,5 @@ public interface MainActivityComponent {
 
     void inject(FormUsersActivity formUsersActivity);
 
+    void inject(SubmitFormActivity submitFormActivity);
 }

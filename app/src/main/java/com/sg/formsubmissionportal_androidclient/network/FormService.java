@@ -54,4 +54,8 @@ public interface FormService {
     @GET("forms/get-form-users/{formCode}")
     Call<ResponseBody> getFormUsers(@Path("formCode") String formCode);
 
+
+    @POST("forms/submit-form")
+    Call<ResponseBody> submitForm(@Body JsonObject jsonObject);
+
 }

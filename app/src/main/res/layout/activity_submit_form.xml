@@ -50,9 +50,12 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_firstName"
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/dimen_4x"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:textSize="@dimen/text_16x"
+                android:inputType="textPersonName"
                 android:layout_height="wrap_content"
                 android:hint="First Name: " />
         </com.google.android.material.textfield.TextInputLayout>
@@ -65,9 +68,12 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_lastName"
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/dimen_4x"
                 android:textSize="@dimen/text_16x"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:inputType="textPersonName"
                 android:layout_height="wrap_content"
                 android:hint="Last Name: " />
         </com.google.android.material.textfield.TextInputLayout>
@@ -80,9 +86,11 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_email"
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/dimen_4x"
                 android:textSize="@dimen/text_16x"
+                android:inputType="textEmailAddress"
                 android:layout_height="wrap_content"
                 android:hint="Email: " />
         </com.google.android.material.textfield.TextInputLayout>
@@ -95,9 +103,11 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/dimen_4x"
                 android:textSize="@dimen/text_16x"
+                android:inputType="phone"
                 android:layout_height="wrap_content"
                 android:hint="Phone Number: " />
         </com.google.android.material.textfield.TextInputLayout>
@@ -110,9 +120,12 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_facultyNumber"
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/dimen_4x"
                 android:textSize="@dimen/text_16x"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+                android:inputType="textCapCharacters"
                 android:layout_height="wrap_content"
                 android:hint="Faculty Number: " />
         </com.google.android.material.textfield.TextInputLayout>
@@ -126,12 +139,24 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_enrolmentNumber"
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/dimen_4x"
                 android:textSize="@dimen/text_16x"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+                android:inputType="textCapCharacters"
                 android:layout_height="wrap_content"
                 android:hint="Enrolment Number: " />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBarSubmitForm"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="@dimen/dimen_8x"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"
