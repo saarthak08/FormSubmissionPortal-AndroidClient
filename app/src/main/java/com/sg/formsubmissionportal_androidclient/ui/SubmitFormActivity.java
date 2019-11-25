@@ -98,12 +98,11 @@ public class SubmitFormActivity extends AppCompatActivity {
                         &&phoneNumber.getText().toString().trim().length()!=0&&facultyNo.getText().toString().trim().length()!=0&&enrollmentNo.getText().toString().trim().length()!=0){
                     JsonObject jsonObject=new JsonObject();
                     JsonObject formDetail=new JsonObject();
-                    formDetail.addProperty("email",email.getText().toString().trim());
-                    formDetail.addProperty("firstName",firstName.getText().toString().trim());
-                    formDetail.addProperty("lastName",lastName.getText().toString().trim());
+                    formDetail.addProperty("email",MainActivity.email);
+                    formDetail.addProperty("firstName",MainActivity.firstName);
+                    formDetail.addProperty("lastName", MainActivity.lastName);
                     formDetail.addProperty("enrollmentNumber",enrollmentNo.getText().toString().trim());
                     formDetail.addProperty("facultyNumber",facultyNo.getText().toString().trim());
-                    formDetail.addProperty("status",true);
                     formDetail.addProperty("phoneNumber",phoneNumber.getText().toString().trim());
                     jsonObject.add("formDetails",formDetail);
                     jsonObject.addProperty("formCode",form.getFormCode());
