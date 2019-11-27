@@ -41,7 +41,7 @@ public class User implements Serializable, Parcelable {
 
     @SerializedName("forms")
     @Expose
-    private List<Form> forms = null;
+    private Object forms;
     public final static Parcelable.Creator<User> CREATOR = new Creator<User>() {
 
 
@@ -67,7 +67,7 @@ public class User implements Serializable, Parcelable {
         this.enabled = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.idNumber = ((String) in.readValue((String.class.getClassLoader())));
         this.role = ((Role) in.readValue((Role.class.getClassLoader())));
-        in.readList(this.forms, (Form.class.getClassLoader()));
+        this.forms=((Object)in.readValue(Object.class.getClassLoader()));
     }
 
     public User() {
@@ -129,11 +129,12 @@ public class User implements Serializable, Parcelable {
         this.role = role;
     }
 
-    public List<Form> getForms() {
+
+    public Object getForms() {
         return forms;
     }
 
-    public void setForms(List<Form> forms) {
+    public void setForms(Object forms) {
         this.forms = forms;
     }
 
@@ -145,7 +146,7 @@ public class User implements Serializable, Parcelable {
         dest.writeValue(enabled);
         dest.writeValue(idNumber);
         dest.writeValue(role);
-        dest.writeList(forms);
+        dest.writeValue(forms);
     }
 
     public int describeContents() {

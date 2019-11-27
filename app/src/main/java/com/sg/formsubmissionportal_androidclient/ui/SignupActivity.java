@@ -72,7 +72,7 @@ public class SignupActivity extends AppCompatActivity {
                     jsonObject.addProperty("firstName",firstName.getText().toString().trim());
                     jsonObject.addProperty("lastName",lastName.getText().toString().trim());
                     jsonObject.addProperty("email",email.getText().toString().trim());
-                    jsonObject.addProperty("idNumber",email.getText().toString().trim());
+                    jsonObject.addProperty("idNumber",idNo.getText().toString().trim());
                     if(radioGroup.getCheckedRadioButtonId()==R.id.radio1){
                         jsonObject.addProperty("role","STUDENT");
                     }

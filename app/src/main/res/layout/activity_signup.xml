@@ -100,9 +100,9 @@
                     android:id="@+id/idNoTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-                    android:hint="@string/faculty_employee_number"
-                    android:inputType="text" />
+                    android:hint="@string/faculty_employee_number" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
