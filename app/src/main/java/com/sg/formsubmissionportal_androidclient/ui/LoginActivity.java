@@ -115,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else{
                             progressBar.setIndeterminate(false);
+                            Log.d("LOGIN_ERROR",response.message());
                             progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(LoginActivity.this,"Login failed! Please try again.",Toast.LENGTH_SHORT).show();
                         }
@@ -124,6 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onFailure(Call<JsonObject> call, Throwable t) {
                         progressBar.setIndeterminate(false);
                         progressBar.setVisibility(View.INVISIBLE);
+
                         Toast.makeText(LoginActivity.this,"Login failed! Please try again.",Toast.LENGTH_SHORT).show();
                         Log.d("Request",t.toString());
                     }

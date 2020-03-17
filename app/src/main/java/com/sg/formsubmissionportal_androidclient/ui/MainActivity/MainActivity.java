@@ -79,18 +79,6 @@ public class MainActivity extends AppCompatActivity {
         token=pref.getString("token","");
         buildDaggerOtherComponent();
         editor=pref.edit();
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        if(role.equals("STUDENT")){
-           fab.setVisibility(View.GONE);
-        }
-
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_myprofile,R.id.nav_allforms,R.id.nav_myforms)
