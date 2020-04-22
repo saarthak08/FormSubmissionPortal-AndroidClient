@@ -35,7 +35,7 @@ public class AllFormsFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private FormsAdapter formsAdapter;
     private ProgressBar progressBar;
-    private ArrayList<Form> formsList;
+    private ArrayList<Form> formsList=new ArrayList<>();
     private TextView textView;
 
 
@@ -77,41 +77,25 @@ public class AllFormsFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-        checkList();
     }
 
-    public void loadView() {
+    private void loadView() {
         formsAdapter = new FormsAdapter(formsList,"AllForms",getContext());
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(formsAdapter);
         checkList();
     }
 
-    public void checkList()
-    {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(formsList==null){
-                    textView.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.GONE);
-                    progressBar.setIndeterminate(false);
-                }
-                else{
-                    if(formsList.size()==0){
-                        textView.setVisibility(View.VISIBLE);
-                        progressBar.setVisibility(View.GONE);
-                        progressBar.setIndeterminate(false);
-                    }
-                    else{
-                        textView.setVisibility(View.VISIBLE);
-                        progressBar.setVisibility(View.GONE);
-                        textView.setVisibility(View.INVISIBLE);
-                    }
-                }
+    private void checkList() {
+            if (formsList.size() == 0) {
+                textView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+                progressBar.setIndeterminate(false);
+            } else {
+                textView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+                textView.setVisibility(View.INVISIBLE);
             }
-        },500);
     }
 }
