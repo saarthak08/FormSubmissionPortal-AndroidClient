@@ -24,7 +24,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class RetrofitInstance {
     private static Retrofit retrofit = null;
     private static Retrofit authRetrofit = null;
-    private static final String BASE_URL = "https://whispering-lowlands-90378.herokuapp.com/api/";
+    private static final String BASE_URL = "https://formsubmissionportal-amu.herokuapp.com/api/";
     private static final int REQUEST_TIMEOUT = 60;
     private static OkHttpClient okHttpClient;
     private static String token="";
